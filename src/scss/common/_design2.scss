@@ -1,0 +1,79 @@
+.wc-design2{
+	display: block;
+	position: fixed;
+	top: 21%;
+	right: 0;
+	bottom: 0;
+	width: 280px;
+	height: 355px;
+	letter-spacing: 0.1px;
+	border-radius: 7px 0 0 5px;
+	font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	z-index: 99;
+}
+
+/* WhatsChat Floating Button */
+.wc-design2 .wc-button{
+	position: absolute;
+	margin-top: -13.5px;
+	top: 50%;
+	bottom: -24px;
+	right: 280px;
+	width: 50px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 32px;
+	text-align: center;
+	border-radius: 6px 0 0 6px;
+	box-shadow: -2px 0px 3px rgba(68, 68, 68, 0.59);
+	cursor: pointer;
+}
+.wc-design2 .wc-button i{
+	padding: 0px 10px 10px 12px;
+	font-size: 30px;
+	cursor: pointer;	
+}
+
+.wc-design2 .wc-panel{
+    display: block;
+	position: initial;
+}
+
+/* User Contact Profile */
+.wc-list .d-flex{
+    display: flex;
+    padding: 5px 5px;
+    border-radius: 5px;
+    border-left: 2px solid #fff;
+}
+.wc-list .wc-img-cont{
+	position: relative;
+}
+.wc-list .wc-user-img{
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	vertical-align: middle;
+}
+.wc-list .wc-status-icon{
+	position: absolute;
+	height: 10px;
+	width: 10px;
+	bottom: 0px;
+    right: 0px;
+    border-radius: 50%;
+}
+.wc-list .wc-user-info{
+	margin-top: 0;
+	margin-bottom: auto;
+	margin-left: 15px;
+}
+.wc-list .wc-chat-icon{
+	position: absolute;
+	margin-top: 15px;
+	right: 13px;
+}
+.wc-list .wc-chat-icon i{
+	display: none;
+	font-size: 25px;
+}

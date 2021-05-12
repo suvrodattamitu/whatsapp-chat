@@ -1,0 +1,29 @@
+{
+  "name": "todo-plugin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run development",
+    "development": "mix",
+    "watch": "mix watch",
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "hot": "mix watch --hot",
+    "prod": "npm run production",
+    "production": "mix --production"
+  },
+  "dependencies": {
+    "element-plus": "^1.0.2-beta.35",
+    "laravel-mix": "^6.0.0",
+    "mitt": "^2.1.0",
+    "vue": "^3.0.7",
+    "vue-router": "^4.0.5"
+  },
+  "devDependencies": {
+    "@vue/compiler-sfc": "^3.0.7",
+    "postcss": "^8.1.14",
+    "resolve-url-loader": "^3.1.0",
+    "sass": "^1.32.8",
+    "sass-loader": "^11.0.1",
+    "vue-loader": "^16.0.0"
+  }
+}

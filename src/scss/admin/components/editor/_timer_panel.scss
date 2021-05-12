@@ -1,0 +1,29 @@
+.ninja_countdown_item {
+    margin:10px 5px;
+    color:#fff;
+    .ninja_countdown_label {
+        display: block;
+        margin-bottom: 8px;
+    }
+    .el-input__inner {
+        color: #fff !important;
+        background: #303131 !important;
+        &:focus {
+            color: #fff;
+            box-shadow:none;
+            outline:none;
+        }
+    }
+    .el-input-number__decrease,.el-input-number__increase{
+        background: #303131 !important;
+        i{
+            color:#fff;
+        }
+        &:hover {
+            color: #fff;
+            box-shadow:none;
+            outline:none;
+        }
+    }
+
+}

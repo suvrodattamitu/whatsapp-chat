@@ -1,0 +1,65 @@
+@import './editor/style_panel';
+@import './editor/timer_panel';
+
+.header{
+    display: flex;
+    float: right;
+    margin-top:10px;
+}
+
+.ninja_countdown_editor {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    .ninja_countdown_settings {
+        width: 29%;
+        margin-top: 10px;
+        float: left;
+    }
+}
+  
+@media (max-width: 600px) {
+    .ninja_countdown_editor {
+        .ninja_countdown_preview {
+            width: 100%;
+            > div {
+                padding: 2em !important;
+            }
+        }
+        .ninja_countdown_settings {
+            width: 100%;
+        }
+    }
+}
+
+.ninja_countdown_settings{
+    .settings_panel{
+        margin-top:15px;
+        .el-tabs{
+            background: #38393a;
+        }
+        .el-tabs__header{
+            background: #38393a;
+            color:#fff;
+            border-bottom:2px solid #000;
+            .el-tabs__nav-scroll{
+                border-bottom:2px solid #000;
+            }
+            .el-tabs__item{
+                color: #fff;
+                &.is-active{
+                    color: #36a0e7;
+                    background-color: #38393a;
+                    border-right-color: #38393a;
+                    border-left-color: #38393a;
+                    border-bottom: 2px solid #36a0e7;
+                }
+            }
+        }
+    }
+}
+.icon-style {
+    i{
+        margin-right:5px;
+    }
+}

@@ -1,0 +1,54 @@
+
+@import './components/elements';
+@import './components/countdown_editor';
+@import './components/settings';
+@import './components/support_and_docs';
+
+//wordpress default admin panel margin issue resolve
+.toplevel_page_ninjawhatsappchat{
+    #wpwrap{
+        > #wpcontent{
+            padding-left: 0;
+        }
+    }
+    #wpbody-content{
+        .wrap{
+            margin: 0;
+        }
+    }
+}
+
+//navbar
+.ninja_countdown_main_nav{
+  border:1px solid #ccc;
+  padding: 0 20px;
+  font-weight: 700;
+  span{
+    color: #000;
+    font-size: 18px;
+    padding-right: 50px;
+    font-weight: 700;
+  }
+  a{
+    text-decoration: none;
+    color: #000;
+    font-size: 14px;
+    text-transform: capitalize;
+    padding: 20px 15px;
+    display: inline-block;
+    transition: 0.4s;
+    &.router-link-exact-active{
+    border-bottom: 3px solid #409EFF;
+    }
+    &:focus{
+      outline: none;
+      box-shadow: none;
+    }
+  }
+}
+
+//content wrapper
+.ninja_countdown_content{
+  padding-right: 15px;
+  padding-left: 15px;
+}

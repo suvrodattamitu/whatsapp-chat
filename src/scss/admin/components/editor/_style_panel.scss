@@ -1,0 +1,76 @@
+.color-customization {
+
+    .el-color-picker__icon,.el-icon-arrow-down{
+        display: none;
+    }
+    .el-color-picker__trigger {
+        border: none;
+    }
+    .el-color-picker__color {
+        border: none;
+    }
+
+    .bgColorList {
+        width: 49%;
+        float: left;
+        max-height: 100px;
+        position: relative;
+        .el-input {
+            width: 98%;
+        }
+    }
+
+    .textColorList {
+        width: 48%;
+        float: right;
+        .gdpr_text_color-picker {
+            position: relative;
+            top: -34px;
+            left: 189px;
+            display: block;
+        }
+    }
+
+    .btnbackground {
+        width: 48%;
+        float: left;
+        margin-top: -23px;
+        .gdpr_btn_bg_color {
+            position: relative;
+            top: -34px;
+            left: 189px;
+            display: block;
+        }
+    }
+
+    .btnColorList {
+        width: 48%;
+        float: right;
+        margin-top: -23px;
+        .gdpr_btn_bg_color {
+            position: relative;
+            top: -34px;
+            left: 189px;
+            display: block;
+        }
+    }
+}
+
+.bgColorList {
+.block-container {
+    //text-align: center;
+    .title {
+        display: inline-block;
+    }
+    .color-picker {
+        display: inline-block;
+        position: absolute;
+        top: 8px;
+        .el-color-picker  {
+            .el-color-picker__trigger {
+                margin-left: 5px;
+            }
+        }
+    }
+}
+}

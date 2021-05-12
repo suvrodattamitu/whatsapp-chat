@@ -1,0 +1,15 @@
+
+.wc-design1{
+	display: inline-block;
+	position: fixed;
+	letter-spacing: 0.1px;
+	font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	z-index: 9999;
+}
+
+/* Media Css for Smaller Device */
+@media(max-width: 576px){
+	.wc-design1 .wc-panel{
+	    width: 290px;
+	}
+}

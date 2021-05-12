@@ -1,0 +1,64 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Ninja Whatsapp Chat\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-28 17:51+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.5.2; wp-5.7.1\n"
+"X-Domain: ninjawhatsappchat"
+
+#: app/Menu.php:119
+msgid "All Collections"
+msgstr ""
+
+#: app/Route/AdminAjaxHandler.php:86
+msgid "All Pages"
+msgstr ""
+
+#: app/Route/AdminAjaxHandler.php:77
+msgid "Congrats, successfully cleared!"
+msgstr ""
+
+#: app/Route/AdminAjaxHandler.php:68 app/Route/AdminAjaxHandler.php:104
+msgid "Congrats, successfully saved!"
+msgstr ""
+
+#: app/Menu.php:48
+msgid "Design Countdown"
+msgstr ""
+
+#. Author of the plugin
+msgid "Light Plugins"
+msgstr ""
+
+#. Name of the plugin
+#: app/Menu.php:35
+msgid "Ninja Whatsapp Chat"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"NInja Countdown - is an easiest alternative to add business countdown "
+"functionalities on your website."
+msgstr ""
+
+#: app/Menu.php:53
+msgid "Settings"
+msgstr ""
+
+#: app/Menu.php:58
+msgid "Support"
+msgstr ""
+
+#: app/Route/AdminAjaxHandler.php:89
+msgid "Untitled"
+msgstr ""
