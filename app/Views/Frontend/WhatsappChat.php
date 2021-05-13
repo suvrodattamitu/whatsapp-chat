@@ -1,22 +1,22 @@
 <div class="wc-<?php echo $configs['layouts']['layout'];?>">
-    <div class="wc-panel" v-if="all_configs">
-		<div class="wc-header">
+    <div class="ninja-chat-box" v-if="all_configs">
+		<div class="ninja-chat-header">
 			<p><?php echo $configs['chat_contents']['chat_header']['title']; ?></p>
 			<strong><?php echo $configs['chat_contents']['chat_header']['description']; ?></strong>
 		</div>
-		<div class="wc-body">	
+		<div class="ninja-chat-body">	
 
             <?php foreach($members as $member): ?>
-                <a class="wc-list" :number="member.member_number">
-                    <div class="wc-img-cont wc-<?php echo esc_html($member['member_status']); ?>">
+                <a class="ninja-member-area" number="<?php echo $member['member_number']; ?>">
+                    <div class="ninja-avatar-container ninja-member-status-<?php echo esc_html($member['member_status']); ?>">
                         <?php if( !empty($member['member_image_url']) ): ?>
-                            <img class="wc-user-img" src="<?php echo esc_url($member['member_image_url']); ?>"/>
+                            <img class="ninja-member-avatar" src="<?php echo esc_url($member['member_image_url']); ?>"/>
                         <?php else: ?>
-                            <img class="wc-user-img" src="<?php echo NINJAWHATSAPPCHAT_URL.'public/images/chat/placeholder.png' ?>" />
+                            <img class="ninja-member-avatar" src="<?php echo NINJAWHATSAPPCHAT_URL.'public/images/chat/placeholder.png' ?>" />
                         <?php endif; ?>
                     </div>
                     
-                    <div class="wc-user-info">
+                    <div class="ninja-member-details">
                         <span><?php echo esc_html($member['member_name']); ?></span>
                         <p><?php echo esc_html($member['member_designation']); ?></p>
                     </div>
@@ -25,7 +25,7 @@
 
 		</div>
 	</div>
-	<div class="wc-button">
+	<div class="ninja-floating-button">
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 			viewBox="0 0 308 308" fill="#fff" xml:space="preserve" width="32" height="32" class="svg-whatsapp">
 			<g id="XMLID_468_">

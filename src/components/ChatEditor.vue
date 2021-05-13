@@ -144,18 +144,18 @@ export default {
             let configs = this.configs;
             return `
                 /* Header Color Styling */
-                .wc-panel .wc-header {
+                .ninja-chat-box .ninja-chat-header {
                     background: ${configs.styles.header_bg_color} !important;
                     color: ${configs.styles.header_text_color} !important;
                 }
-                .wc-button {
+                .ninja-floating-button {
                     background: ${configs.styles.button_bg_color} !important;
                     color: ${configs.styles.button_text_color} !important;
                 }
-                .wc-panel .wc-body{
+                .ninja-chat-box .ninja-chat-body{
                     background: ${configs.styles.body_bg_color} !important;
                 }
-                .wc-panel .wc-body .wc-user-info{
+                .ninja-chat-box .ninja-chat-body .ninja-member-details{
                     color: ${configs.styles.body_text_color} !important;
                 }
             `

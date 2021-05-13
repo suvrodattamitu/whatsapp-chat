@@ -34,13 +34,14 @@ class AdminAjaxHandler
         $route = sanitize_text_field($_REQUEST['route']);
         $validRoutes = array(
             //chat configs
-            'get_chat_configs'  => 'getConfigs',
-            'save_chat_configs' => 'saveConfigs',
+            'get_chat_configs'  => 'getChatConfigs',
+            'save_chat_configs' => 'saveChatConfigs',
 
             //settings configs
-            'get_settings' => 'getSettings',
+            'get_settings'  => 'getSettings',
             'save_settings' => 'saveSettings',
             'clear_configs' => 'clearConfigs',
+            
             //member
             'add_member'    => 'addMember',
             'all_members'   => 'allMembers',
@@ -57,7 +58,7 @@ class AdminAjaxHandler
         do_action('ninjawhatsappchat/admin_ajax_handler_catch', $route);
     }
 
-    public function getConfigs() 
+    public function getChatConfigs() 
     {
         $configs = get_option('ninja_whatsapp_chat_configs', array());
         $configs = (new WhatsappChat())->formatConfigs($configs);
@@ -76,7 +77,7 @@ class AdminAjaxHandler
         ]);
     }
 
-    public function saveConfigs() 
+    public function saveChatConfigs() 
     {
         $configs = json_decode( wp_unslash($_REQUEST['configs']), true);
         $configs = (new WhatsappChat())->formatConfigs($configs);
@@ -85,14 +86,6 @@ class AdminAjaxHandler
             'message'   => __('Congrats, successfully saved!', 'ninjawhatsappchat'),
             'configs'   => $configs
         ]);
-    }
-
-    public function clearConfigs()
-    {
-        delete_option('ninja_whatsapp_chat_configs');
-        wp_send_json_success([
-            'message'   => __('Congrats, successfully cleared!', 'ninjawhatsappchat')
-        ]); 
     }
 
     public static function getSettings()
@@ -114,13 +107,20 @@ class AdminAjaxHandler
 
     public function saveSettings()
     {
-        $checked_pages = json_decode(wp_unslash($_REQUEST['checked_pages']));
-        $checked_pages = json_decode(json_encode($checked_pages), true);
+        $checked_pages = json_decode(wp_unslash($_REQUEST['checked_pages']), true);
         update_option('ninja_whatsappchat_checked_pages',$checked_pages);
         wp_send_json_success([
             'message'   => __('Congrats, successfully saved!', 'ninjawhatsappchat'),
             'checked_pages'   => $checked_pages
         ]);
+    }
+
+    public function clearConfigs()
+    {
+        delete_option('ninja_whatsapp_chat_configs');
+        wp_send_json_success([
+            'message'   => __('Congrats, successfully cleared!', 'ninjawhatsappchat')
+        ]); 
     }
 
     public function validate($fields)

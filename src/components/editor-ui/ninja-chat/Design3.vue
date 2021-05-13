@@ -15,14 +15,14 @@ export default {
     mounted(){
         jQuery(document).ready(function(){
             let clicks = 0;
-            jQuery(".wc-button").click(function() {
+            jQuery(".ninja-floating-button").click(function() {
                 if(clicks%2 === 0) {
-                    jQuery(".wc-panel").removeClass("animated bounceOutRight");
-                    jQuery(".wc-panel").addClass("animated bounceInRight");
-                    jQuery(".wc-panel").show();
+                    jQuery(".ninja-chat-box").removeClass("animated bounceOutRight");
+                    jQuery(".ninja-chat-box").addClass("animated bounceInRight");
+                    jQuery(".ninja-chat-box").show();
                 }else {
-                    jQuery(".wc-panel").removeClass("animated bounceInRight");               
-                    jQuery(".wc-panel").addClass("animated bounceOutRight");
+                    jQuery(".ninja-chat-box").removeClass("animated bounceInRight");               
+                    jQuery(".ninja-chat-box").addClass("animated bounceOutRight");
                 }
                 ++clicks;
             });

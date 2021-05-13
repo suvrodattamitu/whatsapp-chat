@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ninja Whatsapp Chat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-28 17:51+0000\n"
+"POT-Creation-Date: 2021-05-13 14:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,22 +13,26 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.2; wp-5.7.1\n"
+"X-Loco-Version: 2.5.2; wp-5.7.2\n"
 "X-Domain: ninjawhatsappchat"
 
-#: app/Menu.php:119
+#: app/Menu.php:124
 msgid "All Collections"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:86
+#: app/Menu.php:53
+msgid "All Members"
+msgstr ""
+
+#: app/Route/AdminAjaxHandler.php:96
 msgid "All Pages"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:77
+#: app/Route/AdminAjaxHandler.php:122
 msgid "Congrats, successfully cleared!"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:68 app/Route/AdminAjaxHandler.php:104
+#: app/Route/AdminAjaxHandler.php:86 app/Route/AdminAjaxHandler.php:113
 msgid "Congrats, successfully saved!"
 msgstr ""
 
@@ -40,6 +44,22 @@ msgstr ""
 msgid "Light Plugins"
 msgstr ""
 
+#: app/Route/AdminAjaxHandler.php:178
+msgid "Member added successfully!"
+msgstr ""
+
+#: app/Route/AdminAjaxHandler.php:207
+msgid "Member deleted successfully!"
+msgstr ""
+
+#: app/Route/AdminAjaxHandler.php:277
+msgid "Member duplicated successfully!"
+msgstr ""
+
+#: app/Route/AdminAjaxHandler.php:263
+msgid "Member updated successfully!"
+msgstr ""
+
 #. Name of the plugin
 #: app/Menu.php:35
 msgid "Ninja Whatsapp Chat"
@@ -47,18 +67,22 @@ msgstr ""
 
 #. Description of the plugin
 msgid ""
-"NInja Countdown - is an easiest alternative to add business countdown "
-"functionalities on your website."
-msgstr ""
-
-#: app/Menu.php:53
-msgid "Settings"
+"Ninja Whatsapp Chat - is an fastest and easiest alternative to add business "
+"countdown functionalities on your website."
 msgstr ""
 
 #: app/Menu.php:58
+msgid "Settings"
+msgstr ""
+
+#: app/Route/AdminAjaxHandler.php:218
+msgid "Success!"
+msgstr ""
+
+#: app/Menu.php:63
 msgid "Support"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:89
+#: app/Route/AdminAjaxHandler.php:99
 msgid "Untitled"
 msgstr ""

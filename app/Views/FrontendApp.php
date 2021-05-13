@@ -59,6 +59,14 @@ class FrontendApp
                 NINJAWHATSAPPCHAT_VERSION,
                 true
             );
+
+            wp_enqueue_script(
+                'ninjawhatsappchat_manager',
+                NINJAWHATSAPPCHAT_URL . 'public/js/whatsappchat_manager.js',
+                array( 'jquery' ),
+                NINJAWHATSAPPCHAT_VERSION,
+                true
+            );
                 
             return static::getWhatsappChatHTML(['configs' => $configs, 'members' => $allMembers]);
         }
@@ -76,19 +84,19 @@ class FrontendApp
 
         <style type="text/css">
 
-            .wc-panel .wc-header {
+            .ninja-chat-box .ninja-chat-header {
                 background: <?php echo $configs['styles']['header_bg_color'].'!important'; ?>;
                 color: <?php echo $configs['styles']['header_text_color'].'!important'; ?>;
             }
-            .wc-button {
+            .ninja-floating-button {
                 background:<?php echo $configs['styles']['button_bg_color'] .'!important'; ?>;
                 color:<?php echo $configs['styles']['button_text_color'] .'!important'; ?>;
             }
 
-            .wc-panel .wc-body{
+            .ninja-chat-box .ninja-chat-body{
                 background: <?php echo $configs['styles']['body_bg_color'].'!important'; ?>;
             }
-            .wc-panel .wc-body .wc-user-info{
+            .ninja-chat-box .ninja-chat-body .ninja-member-details{
                 color: <?php echo $configs['styles']['body_text_color'].'!important'; ?>;
             }
 

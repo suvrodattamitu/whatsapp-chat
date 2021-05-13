@@ -1,52 +1,40 @@
-=== Lightweight Countdown Timer Plugin for Wordpress ===
-Contributors: (this should be a list of wordpress.org userid's)
-Tags: countdown, timer, Countdown Timer, Ecommerce, Marketing
-Requires at least: 5.0
-Tested up to: 5.7
-Stable tag: 4.3
-Requires PHP: 5.6
+=== Ninja whatsapp chat Builder | Fastest whatsapp chat Builder ===
+Contributors: lovelightplugins
+Tags: whatsapp, whatsapp chat Builder, whatsapp , chat
+Requires at least: 3.4
+Tested up to: 5.7.1
+Stable tag: 1.0.0
 License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
-The easiest and fastest Countdown Timer Plugin for WordPress
+Display clean, customizable, and responsive Whatsapp Chat To Your Wordpress Site.
 
 == Description ==
 
-=The easiest and fastest Countdown Timer Plugin for WordPress=
+The best way of customizable Whatsapp Chat. You can set the Whatsapp Chat the way you thought. 
 
-**🎉 Customization Options**
+= Why Ninja Whatsapp Chat ? =
 
-* You can show whatever you want to say your customers.
-* You can change background color, place bottom/top.
-* You can set any time you want.
-* You can put your sell links to the shop button.
-
-= 🚀 Modern. Powerful. Super Fast 🚀 =
-
-* Build with latest technology
-* Lightweight as it does not load unnecessary assets.
-* It does not effects your page loading.(Total assets is less than 10kb)
+* Fastest Ninja Whatsapp Chat Builder is the Fastest Whatsapp Chat builder.
+* Simplest **simple to set up**
+* Lightweight No un-used assets loads. Assets size is just 10kb.
+* Organized the plugin is well Organized to set up a new.
+* Live Preview You can edit and show live preview 
 
 == Frequently Asked Questions ==
 
-= Is this countdown timer is customzable? =
-
-Yes you can customize everything you want to customize.
-
-= Does it effects page loading? =
-
-Our plugin is not resource hungry. we make it Lightweight. Just necessary assets will be used(less than 10kb);
+= Is The Whatsapp Chat customizable? =
+Yes, You can customize everything of the Whatsapp Chat.
+= Is multiple user supported? =
+Yes, You can add members as your wish.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is stored in the /assets directory.
-2. This is the second screen shot
+1. Completely customizable with live preview editor.
+2. Show the Whatsapp Chat in specific Page
+3. Your customized Whatsapp Chat in frontend
 
 == Changelog ==
 
-= 1.0.0 (Date: September 29, 2020) =
-* Initial Launch
-* 1482 git commits so far
-* 1982 cup of coffee (Just kidding, We lost count)
-* Work of 1 year + 5 developers
-* Let's make WordPress great!
+= 1.0.0 =
+* Launched the Ninja Whatsapp Chat!

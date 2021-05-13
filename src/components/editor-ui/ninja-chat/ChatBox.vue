@@ -1,23 +1,23 @@
 <template>
-	<div class="wc-panel" v-if="all_configs">
-		<div class="wc-header">
+	<div class="ninja-chat-box" v-if="all_configs">
+		<div class="ninja-chat-header">
 			<p>{{ all_configs.chat_contents.chat_header.title }}</p>
 			<strong>{{ all_configs.chat_contents.chat_header.description }}</strong>
 		</div>
-		<div class="wc-body">
-			<a class="wc-list" :number="member.member_number" v-for="(member,index) in members" :key="index">
-				<div class="wc-img-cont" :class="'wc-'+member.member_status">
-					<img v-if="member.member_image_url" class="wc-user-img" :src="member.member_image_url"/>
-					<img v-else class="wc-user-img" :src="assets_url+'/images/chat/placeholder.png'"/>
+		<div class="ninja-chat-body">
+			<a class="ninja-member-area" :number="member.member_number" v-for="(member,index) in members" :key="index">
+				<div class="ninja-avatar-container" :class="'ninja-member-status-'+member.member_status">
+					<img v-if="member.member_image_url" class="ninja-member-avatar" :src="member.member_image_url"/>
+					<img v-else class="ninja-member-avatar" :src="assets_url+'/images/chat/placeholder.png'"/>
 				</div>
-				<div class="wc-user-info">
+				<div class="ninja-member-details">
 					<span>{{ member.member_name }}</span>
 					<p>{{ member.member_designation }}</p>
 				</div>
 			</a>
 		</div>
 	</div>
-	<div class="wc-button">
+	<div class="ninja-floating-button">
 		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 			viewBox="0 0 308 308" fill="#fff" xml:space="preserve" width="32" height="32" class="svg-whatsapp">
 			<g id="XMLID_468_">
@@ -53,7 +53,7 @@ export default {
 	},
 	mounted() {
 		jQuery(document).ready(function(){
-			jQuery('.wc-list').on("click",function(){
+			jQuery('.ninja-member-area').on("click",function(){
 				var number =  jQuery(this).attr("number");
 				if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 					window.open('https://wa.me/'+number, '-blank');  

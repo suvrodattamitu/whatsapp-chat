@@ -14,7 +14,7 @@ export default {
 	},
     mounted(){
 		jQuery(document).ready(function(){
-			jQuery('.wc-button').click (function(event){
+			jQuery('.ninja-floating-button').click (function(event){
 				event.preventDefault();
 				if( jQuery (this).hasClass('inOut') ){
 					jQuery('.wc-design2').stop().animate({right:'-280px'},500 );

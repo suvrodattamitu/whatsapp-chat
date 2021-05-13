@@ -8,7 +8,7 @@
  * License: GPLv2 or later
  * Version: 1.0.0
  * Text Domain: ninjawhatsappchat
- */
+*/
 
 if (!defined('ABSPATH')) {
     exit;
@@ -48,11 +48,9 @@ if (!defined('NINJAWHATSAPPCHAT_VERSION')) {
 
         public function adminHooks()
         {
-            // Register Admin menu
             $menu = new \NinjaWhatsapp\Menu();
             $menu->register();
 
-            // Top Level Ajax Handlers for reviews
             $ajaxHandler = new \NinjaWhatsapp\Route\AdminAjaxHandler();
             $ajaxHandler->registerEndpoints();
 
@@ -61,7 +59,6 @@ if (!defined('NINJAWHATSAPPCHAT_VERSION')) {
                 $adminApp->bootView();
             });
 
-            //remove all admin notice
             add_action('admin_init', function () {
                 $disablePages = [
                     'ninjawhatsappchat',
