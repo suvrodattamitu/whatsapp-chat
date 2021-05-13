@@ -52,6 +52,15 @@
                             </template>
                             </el-table-column>
 
+                            <el-table-column
+                            label="Image"
+                            >
+                            <template #default="scope">
+                                <img v-if="scope.row.member_image_url" height="80" width="80" :src="scope.row.member_image_url">
+                                <img v-else height="80" width="80" :src="assets_url+'/images/chat/placeholder.png'">
+                            </template>
+                            </el-table-column>
+
                             <el-table-column 
                             label="Number"
                             prop="member_number"
@@ -112,17 +121,25 @@
                 :before-close="handleAddClose"
                 width="60%"
             >
-
                 <div class="modal_body">
                     <el-form :model="member">
                         <el-form-item label="Name" :label-width="formLabelWidth">
                             <el-input type="text" v-model="member.member_name" autocomplete="off" size="mini"></el-input>
+                            <p class="error-msg" v-if="errors && errors.member_name"> {{ errors.member_name }} </p>
                         </el-form-item>
                         <el-form-item label="Designation" :label-width="formLabelWidth">
                             <el-input type="text" v-model="member.member_designation" autocomplete="off" size="mini"></el-input>
+                            <p class="error-msg" v-if="errors && errors.member_designation"> {{ errors.member_designation }} </p>
                         </el-form-item>
                         <el-form-item label="Number" :label-width="formLabelWidth">
                             <el-input type="text" v-model="member.member_number" autocomplete="off" size="mini"></el-input>
+                            <p class="error-msg" v-if="errors && errors.member_number"> {{ errors.member_number }} </p>
+                        </el-form-item>
+                        <el-form-item label="Image" :label-width="formLabelWidth">
+                            <input type="file" class="form-control" id="file" @change="onInputChange($event)" />
+                            <div class="form-img-area" v-if="member.member_image_url">
+                                <img height="80" width="80" :src="member.member_image_url" />
+                            </div>
                         </el-form-item>
                         <el-form-item label="Status" :label-width="formLabelWidth" size="mini">
                             <el-select v-model="member.member_status" placeholder="Select" size="mini">
@@ -133,12 +150,13 @@
                                     :value="item.value">
                                 </el-option>
                             </el-select>
+                            <p class="error-msg" v-if="errors && errors.member_status"> {{ errors.member_status }} </p>
                         </el-form-item>
                     </el-form>
                 </div>
                 <template #footer>
                     <span class="dialog-footer">
-                        <el-button @click="showAddFormModal = false">Cancel</el-button>
+                        <el-button @click="handleAddClose()">Cancel</el-button>
                         <el-button type="primary" @click="addMember()">Add</el-button>
                     </span>
                 </template>
@@ -147,20 +165,28 @@
             <el-dialog
                 title="Update a Member"
                 v-model="showEditFormModal"
-                :before-close="handleAddClose"
+                :before-close="handleEditClose"
                 width="60%"
             >
-
                 <div class="modal_body">
                     <el-form :model="member">
                         <el-form-item label="Name" :label-width="formLabelWidth">
                             <el-input type="text" v-model="member.member_name" autocomplete="off" size="mini"></el-input>
+                            <p class="error-msg" v-if="errors && errors.member_name"> {{ errors.member_name }} </p>
                         </el-form-item>
                         <el-form-item label="Designation" :label-width="formLabelWidth">
                             <el-input type="text" v-model="member.member_designation" autocomplete="off" size="mini"></el-input>
+                            <p class="error-msg" v-if="errors && errors.member_designation"> {{ errors.member_designation }} </p>
                         </el-form-item>
                         <el-form-item label="Number" :label-width="formLabelWidth">
                             <el-input type="text" v-model="member.member_number" autocomplete="off" size="mini"></el-input>
+                            <p class="error-msg" v-if="errors && errors.member_number"> {{ errors.member_number }} </p>
+                        </el-form-item>
+                        <el-form-item label="Image" :label-width="formLabelWidth">
+                            <input type="file" class="form-control" id="file" @change="onInputChange($event)" />
+                            <div class="form-img-area" v-if="member.member_image_url">
+                                <img height="80" width="80" :src="member.member_image_url" />
+                            </div>
                         </el-form-item>
                         <el-form-item label="Status" :label-width="formLabelWidth" size="mini">
                             <el-select v-model="member.member_status" placeholder="Select" size="mini">
@@ -226,12 +252,16 @@
     export default {
         data() {
             return {
+                errors:[],
                 formLabelWidth: '120px',
                 member: {
+                    id: null,
                     member_name: '',
                     member_designation: '',
                     member_number: '',
-                    member_status: 'online'
+                    member_status: 'online',
+                    member_image_file: null,
+                    member_image_url: null
                 },
                 member_statuses:[
                     {
@@ -256,10 +286,24 @@
                 total: 0,
                 pageSizes: [5,10, 20, 30, 40, 50],
                 search_string: '',
-                members: []
+                members: [],
+                assets_url: window.NinjaWhatsappAdmin.assets_url
             }
         },
         methods: {
+            //for image file
+            onInputChange(event) {
+                const file = event.target.files[0];
+                this.member.member_image_file = file;
+                let that = this;
+                let reader = new FileReader();
+                reader.onload = (event) => {
+                    // The file's text will be printed here
+                    that.member.member_image_url = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            },
+
             //multiple select
             handleSelectionChange(val) {
                 this.multipleSelection = val;
@@ -273,7 +317,17 @@
                 this.page_number = val;
                 this.getAllMembers();
             },
-            
+            handleAddClose(){
+                this.showAddFormModal = false;
+                document.getElementById("file").value=""; 
+                this.emptyMember();
+            },
+            handleEditClose() {
+                console.log('hi')
+                this.showEditFormModal = false;
+                document.getElementById("file").value=""; 
+                this.emptyMember();
+            },
             confirmDeleteFeed(feed) {
                 this.deletingMember = feed;
                 this.deleteDialogVisible = true;
@@ -305,31 +359,43 @@
                 this.deleteDialogVisible = false;
                 this.deletingMember = {}
             },
-            handleAddClose(){
-                this.addDialogVisible = false;
-            },
             addMember() {
+                const formData = new FormData();
+                formData.append('member_name', this.member.member_name);
+                formData.append('member_number', this.member.member_number);
+                formData.append('member_designation', this.member.member_designation);
+                formData.append('member_status', this.member.member_status);
+                formData.append('file', this.member.member_image_file);
+                formData.append('action', 'ninja_whatsappchat_admin_ajax');
+                formData.append('route', 'add_member');
                 this.loading = true;
-                this.$adminPost({
-                    route: 'add_member',
-                    member: JSON.stringify(this.member)
-                })
-                    .then(response => {
-                        if( response.data ) {
-                            this.showAddFormModal = false;
-                            this.emptyMember();
-                            this.$message({
-                                showClose: true,
-                                message: response.data.message,
-                                type: 'success'
-                            });
-                            this.getAllMembers();
-                        }
-                    }).fail((error) => {
-
-                    }).always(() => {
-                        this.loading = false;
-                    });
+                let that = this;
+                jQuery.ajax({
+                    type: "POST",
+                    enctype: 'multipart/form-data',
+                    url: window.NinjaWhatsappAdmin.ajaxurl,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    timeout: 800000,
+                    success: function (response) {
+                        that.showAddFormModal = false;
+                        that.emptyMember();
+                        that.getAllMembers();
+                        that.$message({
+                            showClose: true,
+                            message: response.data.message,
+                            type: 'success'
+                        });
+                    },
+                    error: function (errors) {
+                        that.errors = errors.responseJSON.data;
+                    },
+                    complete: function() {
+                        that.loading = false;
+                    }
+                });
             },
             getAllMembers(){
                 this.loading = true
@@ -370,34 +436,54 @@
             },
             updateMember() {
                 this.loading = true;
-                this.$adminPost({
-                    route: 'update_member',
-                    member: JSON.stringify(this.member)
-                })
-                    .then(response => {
-                        if( response.data ) {
-                            this.showEditFormModal = false;
-                            this.emptyMember();
-                            this.$message({
-                                showClose: true,
-                                message: response.data.message,
-                                type: 'success'
-                            });
-                            this.getAllMembers();
-                        }
-                    }).fail((error) => {
-
-                    }).always(() => {
-                        this.loading = false;
-                    });
+                const formData = new FormData();
+                formData.append('id', this.member.id);
+                formData.append('member_name', this.member.member_name);
+                formData.append('member_number', this.member.member_number);
+                formData.append('member_designation', this.member.member_designation);
+                formData.append('member_status', this.member.member_status);
+                formData.append('file', this.member.member_image_file);
+                formData.append('action', 'ninja_whatsappchat_admin_ajax');
+                formData.append('route', 'update_member');
+                this.loading = true;
+                let that = this;
+                jQuery.ajax({
+                    type: "POST",
+                    enctype: 'multipart/form-data',
+                    url: window.NinjaWhatsappAdmin.ajaxurl,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    timeout: 800000,
+                    success: function (response) {
+                        that.showEditFormModal = false;
+                        that.emptyMember();
+                        that.getAllMembers();
+                        that.$message({
+                            showClose: true,
+                            message: response.data.message,
+                            type: 'success'
+                        });
+                    },
+                    error: function (errors) {
+                        that.errors = errors.responseJSON.data;
+                    },
+                    complete: function() {
+                        that.loading = false;
+                    }
+                });
             },
             emptyMember() {
                 this.member = {
                     member_name: '',
                     member_designation: '',
                     member_number: '',
-                    member_status: 'online'
-                }
+                    member_status: 'online',
+                    member_image_file: null,
+                    member_image_url: null
+                };
+                this.errors = [];
             },
             duplicateMember(member){
                 this.loading = true;

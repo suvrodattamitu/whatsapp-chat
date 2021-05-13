@@ -8,11 +8,11 @@
             <el-row class="setting_header">
                 <el-col :md="18">
                     <h2>
-                        Show Countdown Timer
+                        Show Whatsapp Chat
                         <el-tooltip class="item" effect="light" placement="bottom-start">
                             <template #content>
-                                <h3>Where to place the timer?</h3>
-                                <p>These Settings is for showing your Countdown timer in specific pages.<br/>You can customize settings for each page</p>
+                                <h3>Where to place the chat?</h3>
+                                <p>These Settings is for showing your WhatsApp Chat in specific pages.<br/>You can customize settings for each page</p>
                             </template>
                             <i class="el-icon-info el-text-info"></i>
                         </el-tooltip>

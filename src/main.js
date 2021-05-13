@@ -5,12 +5,12 @@ window.NinjaWhatsapp.app.mixin({
     
     methods: {
         $adminGet(options) {
-            options.action = 'ninja_countdown_admin_ajax';
+            options.action = 'ninja_whatsappchat_admin_ajax';
             return window.jQuery.get(window.NinjaWhatsappAdmin.ajaxurl, options);
         },
     
         $adminPost(options) {
-            options.action = 'ninja_countdown_admin_ajax';
+            options.action = 'ninja_whatsappchat_admin_ajax';
             return window.jQuery.post(window.NinjaWhatsappAdmin.ajaxurl, options);
         }
     }

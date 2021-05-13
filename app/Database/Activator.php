@@ -65,7 +65,7 @@ class Activator
 				member_designation varchar(255),
 				member_number varchar(255),
 				member_status varchar(255),
-				member_img varchar(255),
+				member_image_url varchar(255),
 				created_at timestamp NULL,
 				updated_at timestamp NULL
 			) $charset_collate;";

@@ -22,7 +22,7 @@ class FrontendApp
 
         $page_id = get_the_ID();
 
-        $checked_pages = get_option('ninja_countdown_checked_pages',array());
+        $checked_pages = get_option('ninja_whatsappchat_checked_pages',array());
         
         $all_pages = in_array('-1', $checked_pages);
         $specific_page = in_array($page_id, $checked_pages);
@@ -47,10 +47,14 @@ class FrontendApp
 
             //dont load assets if the time is ended
             wp_enqueue_style('ninjawhatsappchat', NINJAWHATSAPPCHAT_URL . 'public/css/whatsappchat.css', array(), NINJAWHATSAPPCHAT_VERSION);
+            $css = self::generateCSS( $configs );
+            add_action('wp_head', function () use ($css) {
+                echo $css;
+            });
 
             wp_enqueue_script(
-                'countdown_manager',
-                NINJAWHATSAPPCHAT_URL . 'public/js/'.$configs['layout'].'.js',
+                'ninjawhatsappchat',
+                NINJAWHATSAPPCHAT_URL . 'public/js/'.$configs['layouts']['layout'].'.js',
                 array( 'jquery' ),
                 NINJAWHATSAPPCHAT_VERSION,
                 true
@@ -68,24 +72,17 @@ class FrontendApp
 
     public static function generateCSS($configs)
     {
-        $prefix = '.ninja-countdown-timer-1';
 		?>
 
         <style type="text/css">
-       
-            <?php echo $prefix; ?> {
-                background-color: <?php echo $configs['styles']['background_color'].'!important'; ?>;
-                <?php echo $configs['styles']['position']; ?>:0px;
+
+            .wc-panel .wc-header {
+                background: <?php echo $configs['styles']['header_bg_color'].'!important'; ?>;
+                color: <?php echo $configs['styles']['header_text_color'].'!important'; ?>;
             }
-            <?php echo $prefix; ?> .ninja-countdown-timer-header-title-text{
-                color: <?php echo $configs['styles']['message_color'].'!important';?>;
-            }
-            <?php echo $prefix; ?> .ninja-countdown-timer-button{
-                background-color: <?php echo $configs['styles']['button_color'].'!important'; ?>;
-                color: <?php echo $configs['styles']['button_text_color'].'!important'; ?>;
-            }
-            <?php echo $prefix; ?> .ninja-countdown-timer-item{
-                color: <?php echo $configs['styles']['timer_color'].'!important'; ?>;
+            .wc-button {
+                background:<?php echo $configs['styles']['button_bg_color'] .'!important'; ?>;
+                color:<?php echo $configs['styles']['button_text_color'] .'!important'; ?>;
             }
 
         </style>

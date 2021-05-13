@@ -8,7 +8,8 @@
 
 			<a class="wc-list" :number="member.member_number" v-for="(member,index) in members" :key="index">
 				<div class="wc-img-cont" :class="'wc-'+member.member_status">
-					<img class="wc-user-img" :src="assets_url+'/images/chat/profile_01.jpg'"/>
+					<img v-if="member.member_image_url" class="wc-user-img" :src="member.member_image_url"/>
+					<img v-else class="wc-user-img" :src="assets_url+'/images/chat/placeholder.png'"/>
 				</div>
 				<div class="wc-user-info">
 					<span>{{ member.member_name }}</span>
@@ -18,8 +19,8 @@
 			
 		</div>
 	</div>
-	<div class="wc-button wc-right-bottom">
-		<div id="ninja-whatsapp" class="whatsapp fa fa-whatsapp"></div>
+	<div class="wc-button">
+		
 	</div>
 </template>
 

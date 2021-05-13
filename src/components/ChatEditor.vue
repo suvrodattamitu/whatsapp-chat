@@ -7,25 +7,25 @@
             </el-button>
         </div>
         <div class="ninja_countdown_editor">
-            <div class="ninja_countdown_preview">
-                <chat-panel :all_configs="configs" :members="members"></chat-panel>
+            <div class="ninja_countdown_preview" v-if="configs">
+                <component :is="component" :all_configs="configs" :members="members" />
             </div>
             <div class="ninja_countdown_settings" v-if="configs">
                 <div class="settings_panel">
                     <el-tabs type="border-card">
                         <el-tab-pane>
                             <template #label>
-                                <span class="icon-style"><i class="el-icon-date"></i> Contents</span>
+                                <span class="icon-style"><i class="el-icon-date"></i> Layouts</span>
                             </template>
-                            <timer-panel :chat_contents="configs.chat_contents"></timer-panel>
+                            <layout-panel :layout_configs="configs.layouts"></layout-panel>
                         </el-tab-pane>
 
                         <el-tab-pane>
                             <template #label>
-                                <span class="icon-style"><i class="el-icon-video-play"></i>Chat Bubble</span>
+                                <span class="icon-style"><i class="el-icon-date"></i> Contents</span>
                             </template>
-                            <button-panel :button_configs="configs.chat_bubble"></button-panel>
-                        </el-tab-pane> 
+                            <contents-panel :chat_contents="configs.chat_contents"></contents-panel>
+                        </el-tab-pane>
 
                         <el-tab-pane>
                             <template #label>
@@ -42,18 +42,23 @@
 
 <script type="text/babel">
 import StylePanel from '../components/editor-ui/settings-elements/StylePanel'
-import ButtonPanel from '../components/editor-ui/settings-elements/ButtonPanel'
-import TimerPanel from '../components/editor-ui/settings-elements/TimerPanel'
+import LayoutPanel from '../components/editor-ui/settings-elements/LayoutPanel'
+import ContentsPanel from '../components/editor-ui/settings-elements/ContentsPanel'
 import Remove from '../components/editor-ui/pieces/Remove'
-import ChatPanel from './editor-ui/ninja-chat/ChatPanel'
+
+import Design1 from '../components/editor-ui/ninja-chat/Design1'
+import Design2 from '../components/editor-ui/ninja-chat/Design2'
+import Design3 from '../components/editor-ui/ninja-chat/Design3'
 
 export default {
     components:{
         StylePanel,
-        TimerPanel,
-        ButtonPanel,
+        ContentsPanel,
+        LayoutPanel,
         Remove,
-        ChatPanel
+        Design1,
+		Design2,
+		Design3
     },
 
     data() {
@@ -63,7 +68,8 @@ export default {
             val1:'',
             activeName: "1",
             configs: false,
-            loading: false
+            loading: false,
+            component:Design1,
         }
     },
 
@@ -93,7 +99,7 @@ export default {
         updateConfigs() {
             this.loading = true
             this.$adminPost({
-                route: 'save_configs',
+                route: 'save_chat_configs',
                 configs: JSON.stringify(this.configs)
             })
                 .then(response => {
@@ -122,6 +128,7 @@ export default {
                     if( response.data ) {
                         this.configs = response.data.configs;
                         this.members = response.data.members;
+                        this.component = response.data.configs.layouts.layout;
                     }
                 })
                 .fail(error => {
@@ -135,36 +142,34 @@ export default {
         //css generate start 
         generateCSS(prefix) {
             let configs = this.configs;
+            console.log('reload css ', configs)
             return `
                 /* Header Color Styling */
-                    ${prefix} {
-                    background-color: ${configs.styles.background_color};
-                    ${configs.styles.position}:0;
+                .wc-panel .wc-header {
+                    background: ${configs.styles.header_bg_color} !important;
+                    color: ${configs.styles.header_text_color} !important;
                 }
-                ${prefix} .ninja-countdown-timer-header-title-text{
-                    color: ${configs.styles.message_color};
+                .wc-button {
+                    background: ${configs.styles.button_bg_color} !important;
+                    color: ${configs.styles.button_text_color} !important;
                 }
-                ${prefix} .ninja-countdown-timer-button{
-                    background-color: ${configs.styles.button_color};
-                    color: ${configs.styles.button_text_color}
-                }
-                ${prefix} .ninja-countdown-timer-item{
-                    color: ${configs.styles.timer_color}
-                }
-             `
+            `
         },
 
         reloadCss() {
-            let countdownCss = this.generateCSS('.ninja-countdown-timer-1');
-            jQuery('#ninja_countdown_dynamic_style').html(countdownCss);  
+            let whatsappChatCss = this.generateCSS();
+            jQuery('#ninja_whatsapp_chat_dynamic_style').html(whatsappChatCss);  
         }
         //css generate end
     },
 
     watch:{
         'configs': {
-            handler() {
+            handler(configs) {
                 window.mitt.emit('update_css')
+                if( configs && configs.layouts ) {
+                    this.component = configs.layouts.layout
+                }
             },
             deep: true
         }

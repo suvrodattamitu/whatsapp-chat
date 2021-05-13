@@ -13,7 +13,7 @@
                                 <div class="color-picker">
                                     <el-color-picker
                                         size="mini" 
-                                        v-model="styles_configs.button_color" 
+                                        v-model="styles_configs.button_bg_color" 
                                         show-alpha>
                                     </el-color-picker>
                                 </div>
@@ -43,7 +43,7 @@
                                 <div class="color-picker">
                                     <el-color-picker
                                         size="mini" 
-                                        v-model="styles_configs.header_color" 
+                                        v-model="styles_configs.header_bg_color" 
                                         show-alpha>
                                     </el-color-picker>
                                 </div>
