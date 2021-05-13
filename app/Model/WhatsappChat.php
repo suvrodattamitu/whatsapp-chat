@@ -15,7 +15,6 @@ class WhatsappChat
     public function formatConfigs($settings = array())
     {
         return array(
-            
             'platform' => 'whatsapp',
             'layouts'  => array(
                 'layout' => isset($settings['layouts']['layout']) ? $settings['layouts']['layout'] : 'design2',
@@ -30,12 +29,13 @@ class WhatsappChat
                     'button_icon' => isset($settings['chat_contents']['chat_bubble']['button_icon']) ? $settings['chat_contents']['chat_bubble']['button_icon'] : 'icon7',
                 ),
             ),
-            
             'styles' => array(
-                'button_bg_color' => isset($settings['styles']['button_bg_color']) ? $settings['styles']['button_bg_color'] : '',
-                'button_text_color' => isset($settings['styles']['button_text_color']) ? $settings['styles']['button_text_color'] : '',
-                'header_bg_color' => isset($settings['styles']['header_bg_color']) ? $settings['styles']['header_bg_color'] : '',
-                'header_text_color' => isset($settings['styles']['header_text_color']) ? $settings['styles']['header_text_color'] : '',
+                'button_bg_color' => isset($settings['styles']['button_bg_color']) ? $settings['styles']['button_bg_color'] : '#fff',
+                'button_text_color' => isset($settings['styles']['button_text_color']) ? $settings['styles']['button_text_color'] : '#ffffff',
+                'header_bg_color' => isset($settings['styles']['header_bg_color']) ? $settings['styles']['header_bg_color'] : '#095E54',
+                'header_text_color' => isset($settings['styles']['header_text_color']) ? $settings['styles']['header_text_color'] : '#ffffff',
+                'body_bg_color' => isset($settings['styles']['body_bg_color']) ? $settings['styles']['body_bg_color'] : '#ffffff',
+                'body_text_color' => isset($settings['styles']['body_text_color']) ? $settings['styles']['body_text_color'] : '#2271b1',
             )
         );    
     }

@@ -64,6 +64,36 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="bgColorList">
+                            <div class="block-container">
+                                <div class="title">
+                                    <p>{{ 'BODY COLOR' }}</p>
+                                </div>
+                                <div class="color-picker">
+                                    <el-color-picker
+                                        size="mini" 
+                                        v-model="styles_configs.body_bg_color" 
+                                        show-alpha>
+                                    </el-color-picker>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bgColorList">
+                            <div class="block-container">
+                                <div class="title">
+                                    <p>{{ 'BODY TEXT COLOR' }}</p>
+                                </div>
+                                <div class="color-picker">
+                                    <el-color-picker
+                                        size="mini" 
+                                        v-model="styles_configs.body_text_color" 
+                                        show-alpha>
+                                    </el-color-picker>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </el-col>

@@ -142,7 +142,6 @@ export default {
         //css generate start 
         generateCSS(prefix) {
             let configs = this.configs;
-            console.log('reload css ', configs)
             return `
                 /* Header Color Styling */
                 .wc-panel .wc-header {
@@ -152,6 +151,12 @@ export default {
                 .wc-button {
                     background: ${configs.styles.button_bg_color} !important;
                     color: ${configs.styles.button_text_color} !important;
+                }
+                .wc-panel .wc-body{
+                    background: ${configs.styles.body_bg_color} !important;
+                }
+                .wc-panel .wc-body .wc-user-info{
+                    color: ${configs.styles.body_text_color} !important;
                 }
             `
         },

@@ -85,6 +85,13 @@ class FrontendApp
                 color:<?php echo $configs['styles']['button_text_color'] .'!important'; ?>;
             }
 
+            .wc-panel .wc-body{
+                background: <?php echo $configs['styles']['body_bg_color'].'!important'; ?>;
+            }
+            .wc-panel .wc-body .wc-user-info{
+                color: <?php echo $configs['styles']['body_text_color'].'!important'; ?>;
+            }
+
         </style>
 
 		<?php

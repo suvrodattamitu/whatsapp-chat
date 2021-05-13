@@ -6,7 +6,7 @@
  * Author: Light Plugins
  * Author URI: 
  * License: GPLv2 or later
- * Version: 1.3.1
+ * Version: 1.0.0
  * Text Domain: ninjawhatsappchat
  */
 

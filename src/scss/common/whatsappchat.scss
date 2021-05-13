@@ -2,29 +2,24 @@
 @import './design2';
 @import './design3';
 
-//colors
-.wc-panel .wc-header,
-.wc-body .wc-list .wc-online,
-.wc-button{
-	background: -webkit-linear-gradient(to right, #26C281, #09e072);
-    background: -moz-linear-gradient(to right, #26C281, #09e072);
-    background: -ms-linear-gradient(to right, #26C281, #09e072);
-    background: -o-linear-gradient(to right, #26C281, #09e072);
-    background: linear-gradient(to right, #26C281, #09e072);
+.wc-online{
+	background: rgb(13, 192, 28);
 }
-.wc-panel .wc-header,
-.wc-button i{
-	color: #fff;
+
+.wc-button{
+	background: #fff;
+	display: flex;
+    align-items: center;
+    justify-content: center
 }
 
 //chat button
 .wc-button{
 	position: fixed;
-	width: 50px;
-	height: 50px;
+	width: 64px;
+	height: 64px;
 	bottom: 50px;
 	right: 20px;
-	border: 1px solid #fff;
 	border-radius: 50px;
 	text-align: center;
 	box-shadow: 0 0 10px rgba(12, 12, 12, 0.3);	
@@ -48,7 +43,6 @@
 	border-radius: 10px;
 	box-shadow: 0px 3px 7px rgba(12, 12, 12, 0.18);
 	z-index: 9;
-	background: #fff;
 }
 
 /* Panel Header Content */
@@ -74,6 +68,7 @@
 	white-space: nowrap;
 	list-style: none;
 	overflow-y: auto;
+	background: #fff;
 }
 
 .wc-body .wc-list:hover{
