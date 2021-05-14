@@ -3,7 +3,7 @@
         <div class="ninja_all_feeds">
             <el-row>
                 <el-col>
-                    <div class="ninja_feed_table" v-loading="loading">
+                    <div class="ninja_feed_table" v-loading="loading" element-loading-text="Loading..Please wait...">
                         <div class="ninja_table_actions">
                             <div class="nina_search_action">
                                 <el-input type="text" size="medium" v-model="search_string"  @keyup.enter="getAllMembers">
@@ -56,8 +56,10 @@
                             label="Image"
                             >
                             <template #default="scope">
-                                <img v-if="scope.row.member_image_url" height="80" width="80" :src="scope.row.member_image_url">
-                                <img v-else height="80" width="80" :src="assets_url+'/images/chat/placeholder.png'">
+                                <div class="ninja-member-avatar-container">
+                                    <img class="ninja-member-avatar" v-if="scope.row.member_image_url" :src="scope.row.member_image_url">
+                                    <img class="ninja-member-avatar" v-else :src="assets_url+'/images/chat/placeholder.png'">
+                                </div>
                             </template>
                             </el-table-column>
 
@@ -80,7 +82,6 @@
                             </el-table-column>
                         </el-table>
                     </div>
-
                     <div class="ninja_pagination">
                         <el-pagination
                             background
@@ -98,13 +99,13 @@
 
             <!--Delete form Confimation Modal-->
             <el-dialog
-                    title="Are You Sure, You want to delete this Feed?"
+                    title="Are You Sure, You want to delete this member?"
                     v-model="deleteDialogVisible"
                     :before-close="handleDeleteClose"
                     width="60%">
                 <div class="modal_body">
-                    <p>All the data assoscilate with this feed will be deleted</p>
-                    <p>You are deleting feed id: <b>{{ deletingMember.id }}</b>. <br/>Member Name: <b>{{
+                    <p>All the data assoscilate with this member will be deleted</p>
+                    <p>You are deleting member id: <b>{{ deletingMember.id }}</b>. <br/>Member Name: <b>{{
                         deletingMember.member_name }}</b></p>
                 </div>
                 <template #footer>
@@ -136,7 +137,7 @@
                             <p class="error-msg" v-if="errors && errors.member_number"> {{ errors.member_number }} </p>
                         </el-form-item>
                         <el-form-item label="Image" :label-width="formLabelWidth">
-                            <input type="file" class="form-control" id="file" @change="onInputChange($event)" />
+                            <input type="file" class="form-control" id="add-file" @change="onInputChange($event)" />
                             <div class="form-img-area" v-if="member.member_image_url">
                                 <img height="80" width="80" :src="member.member_image_url" />
                             </div>
@@ -157,7 +158,10 @@
                 <template #footer>
                     <span class="dialog-footer">
                         <el-button @click="handleAddClose()">Cancel</el-button>
-                        <el-button type="primary" @click="addMember()">Add</el-button>
+                        <el-button type="primary" :loading="adding" @click="addMember()">
+                            <span v-if="adding">Creating Member...</span>
+                            <span v-else>Add Member</span>
+                        </el-button>
                     </span>
                 </template>
             </el-dialog>
@@ -168,7 +172,7 @@
                 :before-close="handleEditClose"
                 width="60%"
             >
-                <div class="modal_body">
+                <div class="modal_body" v-loading="fetching" element-loading-text="Loading Members...">
                     <el-form :model="member">
                         <el-form-item label="Name" :label-width="formLabelWidth">
                             <el-input type="text" v-model="member.member_name" autocomplete="off" size="mini"></el-input>
@@ -183,7 +187,7 @@
                             <p class="error-msg" v-if="errors && errors.member_number"> {{ errors.member_number }} </p>
                         </el-form-item>
                         <el-form-item label="Image" :label-width="formLabelWidth">
-                            <input type="file" class="form-control" id="file" @change="onInputChange($event)" />
+                            <input type="file" class="form-control" id="edit-file" @change="onInputChange($event)" />
                             <div class="form-img-area" v-if="member.member_image_url">
                                 <img height="80" width="80" :src="member.member_image_url" />
                             </div>
@@ -203,17 +207,34 @@
                 <template #footer>
                     <span class="dialog-footer">
                         <el-button @click="showEditFormModal = false">Cancel</el-button>
-                        <el-button type="primary" @click="updateMember()">Update</el-button>
+                        <el-button type="primary" @click="updateMember()" :loading="updating">
+                            <span v-if="updating">Updating Member...</span>
+                            <span v-else>Update Member</span>
+                        </el-button>
                     </span>
                 </template>
             </el-dialog>
-
         </div>
     </div>
 </template>
 
 <style lang="scss">
     .ninja_all_feeds{
+        .ninja-member-avatar-container{
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            .ninja-member-avatar{
+                display: block;
+                margin: 0 auto;
+                max-width: 100%;
+                height: 100%;
+            }
+        }
+        .el-dialog__header {
+            text-align: center;
+            font-weight: 700;
+        }
         .el-input__suffix{
             right: 0px !important;
         }
@@ -276,6 +297,9 @@
                 showEditFormModal: false,
                 showAddFormModal: false,
                 loading: false,
+                fetching: false,
+                updating: false,
+                adding: false,
                 allFeeds: [],
                 multipleSelection: [],
                 deletingMember: {},
@@ -319,13 +343,12 @@
             },
             handleAddClose(){
                 this.showAddFormModal = false;
-                document.getElementById("file").value=""; 
+                document.getElementById("add-file").value=""; 
                 this.emptyMember();
             },
             handleEditClose() {
-                console.log('hi')
                 this.showEditFormModal = false;
-                document.getElementById("file").value=""; 
+                document.getElementById("edit-file").value=""; 
                 this.emptyMember();
             },
             confirmDeleteFeed(feed) {
@@ -368,7 +391,7 @@
                 formData.append('file', this.member.member_image_file);
                 formData.append('action', 'ninja_whatsappchat_admin_ajax');
                 formData.append('route', 'add_member');
-                this.loading = true;
+                this.adding = true;
                 let that = this;
                 jQuery.ajax({
                     type: "POST",
@@ -380,20 +403,23 @@
                     cache: false,
                     timeout: 800000,
                     success: function (response) {
-                        that.showAddFormModal = false;
-                        that.emptyMember();
-                        that.getAllMembers();
-                        that.$message({
-                            showClose: true,
-                            message: response.data.message,
-                            type: 'success'
-                        });
+                        if( response.data ) {
+                            that.showAddFormModal = false;
+                            that.emptyMember();
+                            that.getAllMembers();
+                            that.$message({
+                                showClose: true,
+                                message: response.data.message,
+                                type: 'success'
+                            });
+                            document.getElementById("add-file").value=""; 
+                        }
                     },
                     error: function (errors) {
                         that.errors = errors.responseJSON.data;
                     },
                     complete: function() {
-                        that.loading = false;
+                        that.adding = false;
                     }
                 });
             },
@@ -419,7 +445,7 @@
             },
             editMember(memberId) {
                 this.showEditFormModal = true;
-                this.loading = true
+                this.fetching = true
                 this.$adminGet({
                     route: 'get_member',
                     member_id: memberId
@@ -431,11 +457,10 @@
                     }).fail(error => {
 
                     }).always(() => {
-                        this.loading = false
+                        this.fetching = false
                     });
             },
             updateMember() {
-                this.loading = true;
                 const formData = new FormData();
                 formData.append('id', this.member.id);
                 formData.append('member_name', this.member.member_name);
@@ -445,7 +470,7 @@
                 formData.append('file', this.member.member_image_file);
                 formData.append('action', 'ninja_whatsappchat_admin_ajax');
                 formData.append('route', 'update_member');
-                this.loading = true;
+                this.updating = true;
                 let that = this;
                 jQuery.ajax({
                     type: "POST",
@@ -457,20 +482,23 @@
                     cache: false,
                     timeout: 800000,
                     success: function (response) {
-                        that.showEditFormModal = false;
-                        that.emptyMember();
-                        that.getAllMembers();
-                        that.$message({
-                            showClose: true,
-                            message: response.data.message,
-                            type: 'success'
-                        });
+                        if( response.data ) {
+                            that.showEditFormModal = false;
+                            that.emptyMember();
+                            that.getAllMembers();
+                            that.$message({
+                                showClose: true,
+                                message: response.data.message,
+                                type: 'success'
+                            });
+                            document.getElementById("edit-file").value=""; 
+                        }
                     },
                     error: function (errors) {
                         that.errors = errors.responseJSON.data;
                     },
                     complete: function() {
-                        that.loading = false;
+                        that.updating = false;
                     }
                 });
             },

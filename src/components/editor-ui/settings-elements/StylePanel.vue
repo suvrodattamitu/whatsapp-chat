@@ -98,12 +98,21 @@
                 </div>
             </el-col>
         </el-row>
+        <el-row v-if="layout === 'design2'">
+            <el-col :span="24">
+                <div class="ninja_countdown_item">
+                    <label class="ninja_countdown_label">FLOATING BUTTON POSITION FROM TOP (in %)</label>
+                    <el-input type="number" v-model="styles_configs.button_position" size="mini"></el-input>
+                </div>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
-<script>
+<script type="text/babel">
 export default {
-    props:['styles_configs'],
+    name: 'StylePanel',
+    props:['styles_configs','layout'],
     watch: {
         styles_configs: {
             handler(val){

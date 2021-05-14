@@ -1,5 +1,5 @@
 <template>
-    <div class="ninja_countdown_wrapper" v-loading="loading">
+    <div class="ninja_countdown_wrapper" v-loading.body="loading" element-loading-text="Loading..Please wait...">
         <div class="header">
             <remove @on-confirm="clearConfigs"></remove>
             <el-button type="primary" size="mini" @click="updateConfigs">
@@ -31,7 +31,7 @@
                             <template #label>
                                 <span class="icon-style"><i class="el-icon-edit"></i>Style</span>
                             </template>
-                            <style-panel :styles_configs="configs.styles"></style-panel>
+                            <style-panel :styles_configs="configs.styles" :layout="configs.layouts.layout"></style-panel>
                         </el-tab-pane>
                     </el-tabs>
                 </div>
@@ -157,6 +157,9 @@ export default {
                 }
                 .ninja-chat-box .ninja-chat-body .ninja-member-details{
                     color: ${configs.styles.body_text_color} !important;
+                }
+                .wc-design2 .ninja-floating-button {
+                    top: ${configs.styles.button_position}% !important;
                 }
             `
         },

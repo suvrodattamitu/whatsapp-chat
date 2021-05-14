@@ -1,13 +1,13 @@
-<div class="wc-<?php echo $configs['layouts']['layout'];?>">
-    <div class="ninja-chat-box" v-if="all_configs">
+<div class="ninja-chat-<?php echo esc_html($configs['layouts']['layout']);?>">
+    <div class="ninja-chat-box">
 		<div class="ninja-chat-header">
-			<p><?php echo $configs['chat_contents']['chat_header']['title']; ?></p>
-			<strong><?php echo $configs['chat_contents']['chat_header']['description']; ?></strong>
+			<p><?php echo esc_html($configs['chat_contents']['chat_header']['title']); ?></p>
+			<strong><?php echo esc_html($configs['chat_contents']['chat_header']['description']); ?></strong>
 		</div>
 		<div class="ninja-chat-body">	
 
             <?php foreach($members as $member): ?>
-                <a class="ninja-member-area" number="<?php echo $member['member_number']; ?>">
+                <a class="ninja-member-area" number="<?php echo esc_html($member['member_number']); ?>">
                     <div class="ninja-avatar-container ninja-member-status-<?php echo esc_html($member['member_status']); ?>">
                         <?php if( !empty($member['member_image_url']) ): ?>
                             <img class="ninja-member-avatar" src="<?php echo esc_url($member['member_image_url']); ?>"/>

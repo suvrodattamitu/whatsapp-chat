@@ -18,8 +18,9 @@
     </div>
 </template>
 
-<script>
+<script type="text/babel">
 export default {
+    name: 'LayoutPanel',
     props:['layout_configs'],
     data(){
         return {

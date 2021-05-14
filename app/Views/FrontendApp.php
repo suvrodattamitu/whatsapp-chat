@@ -27,9 +27,9 @@ class FrontendApp
         $all_pages = in_array('-1', $checked_pages);
         $specific_page = in_array($page_id, $checked_pages);
 
-        $showTimer = $all_pages || $specific_page;
+        $showChat = $all_pages || $specific_page;
     
-        if( $showTimer ) { 
+        if( $showChat ) { 
             $configs = get_option('ninja_whatsapp_chat_configs', array());
             $configs = (new WhatsappChat())->formatConfigs($configs);
 
@@ -45,7 +45,6 @@ class FrontendApp
                 $allMembers = (new WhatsappChat())->dummyMembers();
             }
 
-            //dont load assets if the time is ended
             wp_enqueue_style('ninjawhatsappchat', NINJAWHATSAPPCHAT_URL . 'public/css/whatsappchat.css', array(), NINJAWHATSAPPCHAT_VERSION);
             $css = self::generateCSS( $configs );
             add_action('wp_head', function () use ($css) {
@@ -54,7 +53,7 @@ class FrontendApp
 
             wp_enqueue_script(
                 'ninjawhatsappchat',
-                NINJAWHATSAPPCHAT_URL . 'public/js/'.$configs['layouts']['layout'].'.js',
+                NINJAWHATSAPPCHAT_URL . 'public/frontend/'.$configs['layouts']['layout'].'.js',
                 array( 'jquery' ),
                 NINJAWHATSAPPCHAT_VERSION,
                 true
@@ -62,7 +61,7 @@ class FrontendApp
 
             wp_enqueue_script(
                 'ninjawhatsappchat_manager',
-                NINJAWHATSAPPCHAT_URL . 'public/js/whatsappchat_manager.js',
+                NINJAWHATSAPPCHAT_URL . 'public/frontend/whatsappchat_manager.js',
                 array( 'jquery' ),
                 NINJAWHATSAPPCHAT_VERSION,
                 true
@@ -98,6 +97,9 @@ class FrontendApp
             }
             .ninja-chat-box .ninja-chat-body .ninja-member-details{
                 color: <?php echo $configs['styles']['body_text_color'].'!important'; ?>;
+            }
+            .wc-design2 .ninja-floating-button {
+                top: <?php echo $configs['styles']['button_position'].'% !important'; ?>
             }
 
         </style>

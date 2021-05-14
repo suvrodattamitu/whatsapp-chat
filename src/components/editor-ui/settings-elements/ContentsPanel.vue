@@ -29,8 +29,9 @@
     </div>
 </template>
 
-<script>
+<script type="text/babel">
 export default {
-    props:['chat_contents']
+    name: 'ContentsPanel',
+    props: ['chat_contents']
 }
 </script>

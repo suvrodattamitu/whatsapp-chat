@@ -60,8 +60,8 @@ class AdminAjaxHandler
 
     public function getChatConfigs() 
     {
-        $configs = get_option('ninja_whatsapp_chat_configs', array());
-        $configs = (new WhatsappChat())->formatConfigs($configs);
+        $chatConfigs = get_option('ninja_whatsapp_chat_configs', array());
+        $chatConfigs = (new WhatsappChat())->formatConfigs($chatConfigs);
 
         global $wpdb;
         $tablename = $wpdb->prefix . "ninja_chats";
@@ -72,16 +72,17 @@ class AdminAjaxHandler
         }
         
         wp_send_json_success([
-            'configs'   => $configs,
+            'configs'   => $chatConfigs,
             'members'   => $allMembers
         ]);
     }
 
     public function saveChatConfigs() 
     {
-        $configs = json_decode( wp_unslash($_REQUEST['configs']), true);
-        $configs = (new WhatsappChat())->formatConfigs($configs);
-        update_option('ninja_whatsapp_chat_configs',$configs);
+        $chatConfigsJson = sanitize_text_field($_REQUEST['configs']);
+        $chatConfigs = json_decode( wp_unslash($chatConfigsJson), true);
+        $chatConfigs = (new WhatsappChat())->formatConfigs($chatConfigs);
+        update_option('ninja_whatsapp_chat_configs',$chatConfigs);
         wp_send_json_success([
             'message'   => __('Congrats, successfully saved!', 'ninjawhatsappchat'),
             'configs'   => $configs
@@ -107,11 +108,12 @@ class AdminAjaxHandler
 
     public function saveSettings()
     {
-        $checked_pages = json_decode(wp_unslash($_REQUEST['checked_pages']), true);
-        update_option('ninja_whatsappchat_checked_pages',$checked_pages);
+        $checkedPagesJson = sanitize_text_field($_REQUEST['checked_pages']);
+        $checkedPages = json_decode(wp_unslash($checkedPagesJson), true);
+        update_option('ninja_whatsappchat_checked_pages',$checkedPages);
         wp_send_json_success([
             'message'   => __('Congrats, successfully saved!', 'ninjawhatsappchat'),
-            'checked_pages'   => $checked_pages
+            'checked_pages'   => $checkedPages
         ]);
     }
 
@@ -127,10 +129,10 @@ class AdminAjaxHandler
     {
         unset($fields['action']);
         unset($fields['route']);
-        unset($fields['id']);
+        unset($fields['file']);
+        unset($member['id']);
 
         $validator = array();
-        unset($fields['file']);
 
         foreach($fields as $key => $field) {
             if( empty($field) ) {
@@ -138,47 +140,65 @@ class AdminAjaxHandler
             }
         }
 
+        $sanitizedMember = array();
+        foreach($fields as $key => $field) {
+            if( !empty($field) ) {
+                $sanitizedMember[$key] = sanitize_text_field($field);
+            }
+        }
+
         if( !empty($validator) ) {
             wp_send_json_error($validator,423);
         }
+
+        return $sanitizedMember;
     }
 
     public function addMember() 
-    {        
+    {   
         $member = $_REQUEST;
         $uploadedfile = isset( $_FILES['file'] ) ? $_FILES['file'] : null;
-        
-        $this->validate($member);
 
-        if (!function_exists('wp_handle_upload')) {
-            require_once(ABSPATH . 'wp-admin/includes/file.php');
-        }
+        //validated and sanitized input fields
+        $member = $this->validate($member);
 
-        $acceptedFilles = array(
-            'image/png',
-            'image/jpeg'
-        );
+        $member['member_image_url'] = '';
 
-        if (!in_array($uploadedfile['type'], $acceptedFilles)) {
-            wp_send_json(__('Please upload only jpg/png format files', 'wpsocialreviews'), 423);
-        }
+        if( !empty($uploadedfile) ) {
+            if (!function_exists('wp_handle_upload')) {
+                require_once(ABSPATH . 'wp-admin/includes/file.php');
+            }
 
-        $upload_overrides = array('test_form' => false);
+            $acceptedFilles = array(
+                'image/png',
+                'image/jpeg'
+            );
 
-        $movefile = wp_handle_upload($uploadedfile, $upload_overrides);
+            if (!in_array($uploadedfile['type'], $acceptedFilles)) {
+                wp_send_json_error([
+                    'message' => __('Please upload only jpg/png format files', 'ninjawhatsappchat')
+                ], 423);
+            }
 
-        if ($movefile && !isset($movefile['error'])) {
+            $upload_overrides = array('test_form' => false);
+            $movefile = wp_handle_upload($uploadedfile, $upload_overrides);
+
+            if (isset($movefile['error'])) {
+                wp_send_json_error([
+                    'message' => $movefile['error']
+                ], 423);
+            }
+
             $member['member_image_url'] = $movefile['url'];
-            unset($member['action']);
-            unset($member['route']);
-            global $wpdb;
-            $tablename = $wpdb->prefix.'ninja_chats';
-            $wpdb->insert( $tablename, $member );
-            wp_send_json_success([
-                'message'    => __('Member added successfully!', 'ninjawhatsappchat'),
-                'member'    => $member,
-            ],200);
         }
+
+        global $wpdb;
+        $tablename = $wpdb->prefix.'ninja_chats';
+        $wpdb->insert( $tablename, $member );
+        wp_send_json_success([
+            'message'    => __('Member added successfully!', 'ninjawhatsappchat'),
+            'member'    => $member,
+        ],200);
     }
 
     public function allMembers()
@@ -223,41 +243,41 @@ class AdminAjaxHandler
     public function updateMember()
     {
         $member = $_REQUEST;
-        $this->validate($member);
+        $uploadedfile = isset($_FILES['file']) ? $_FILES['file'] : null;
         
-        if (!function_exists('wp_handle_upload')) {
-            require_once(ABSPATH . 'wp-admin/includes/file.php');
-        }
-        $uploadedfile = isset($_FILES['file']) ? _FILES['file'] : null;
-
-        if( !empty($uploadedfile) ) {
-            $acceptedFilles = array(
-                'image/png',
-                'image/jpeg'
-            );
-
-            if (!in_array($uploadedfile['type'], $acceptedFilles)) {
-                wp_send_json(__('Please upload only jpg/png format files', 'wpsocialreviews'), 423);
-            }
-
-            $upload_overrides = array('test_form' => false);
-
-            $movefile = wp_handle_upload($uploadedfile, $upload_overrides);
-
-            if ($movefile && !isset($movefile['error'])) {
-                $member['member_image_url'] = $movefile['url'];
-            }
-        }
-
-        unset($member['file']);
-        unset($member['action']);
-        unset($member['route']);
-
-        global $wpdb;
-        $tablename = $wpdb->prefix.'ninja_chats';
         if( isset($member['id']) && !empty($member['id'])) {
-            $memberId = $member['id'];
-            unset($member['id']);
+
+            $memberId = (int)$member['id'];
+
+            //validated and sanitized input fields
+            $member = $this->validate($member);
+            
+            if (!function_exists('wp_handle_upload')) {
+                require_once(ABSPATH . 'wp-admin/includes/file.php');
+            }
+
+            if( !empty($uploadedfile) ) {
+                $acceptedFilles = array(
+                    'image/png',
+                    'image/jpeg'
+                );       
+
+                if (!in_array($uploadedfile['type'], $acceptedFilles)) {
+                    wp_send_json(__('Please upload only jpg/png format files', 'wpsocialreviews'), 423);
+                }
+
+                $upload_overrides = array('test_form' => false);
+
+                $movefile = wp_handle_upload($uploadedfile, $upload_overrides);
+
+                if ($movefile && !isset($movefile['error'])) {
+                    $member['member_image_url'] = $movefile['url'];
+                }
+            }
+
+            global $wpdb;
+            $tablename = $wpdb->prefix.'ninja_chats';
+            
             $wpdb->update( $tablename, $member,  array( 'id' => $memberId ) );
             wp_send_json_success([
                 'message'    => __('Member updated successfully!', 'ninjawhatsappchat'),

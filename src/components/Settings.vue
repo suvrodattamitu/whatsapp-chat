@@ -1,9 +1,7 @@
 <template>
-    <div class="ninja_countdown_settings_wrapper" v-loading="loading">
-
+    <div class="ninja_countdown_settings_wrapper" v-loading="loading" element-loading-text="Loading..Please wait...">
         <div class="ninja_settings_panel">
             <h2 class="ninja_header_text">Advance Settings</h2>
-
             <!--Save settings-->
             <el-row class="setting_header">
                 <el-col :md="18">
@@ -23,11 +21,9 @@
             <el-form ref="form-layout" label-position="left">
                 <!--Label Placement-->
                 <el-form-item>
-
                     <div>
                         <span>Pages :</span>
                     </div>
-
                     <div v-if="pages">
                         <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll"  @change="handleCheckAllChange">Check all</el-checkbox>
                         <div style="margin: 15px 0;"></div>
@@ -35,11 +31,8 @@
                             <el-checkbox v-for="page in pages" :label="page.page_id" :key="page.page_title">{{page.page_title}}</el-checkbox>
                         </el-checkbox-group>
                     </div>
-
                 </el-form-item>
-
             </el-form>
-
             <!--Save settings-->
             <el-row>
                 <el-col class="action-buttons clearfix mb15">
@@ -47,7 +40,6 @@
                 </el-col>
             </el-row>
         </div>
-
     </div>
 </template>
 

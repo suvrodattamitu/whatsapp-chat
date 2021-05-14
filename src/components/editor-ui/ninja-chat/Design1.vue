@@ -1,5 +1,5 @@
 <template>
-    <div class="wc-design1">
+    <div class="ninja-chat-design1">
         <chat-box :all_configs="all_configs" :members="members"></chat-box>
     </div>
 </template>

@@ -32,6 +32,7 @@ class WhatsappChat
             'styles' => array(
                 'button_bg_color' => isset($settings['styles']['button_bg_color']) ? $settings['styles']['button_bg_color'] : '#fff',
                 'button_text_color' => isset($settings['styles']['button_text_color']) ? $settings['styles']['button_text_color'] : '#ffffff',
+                'button_position'   => isset($settings['styles']['button_position']) ? (int)$settings['styles']['button_position'] : 50,
                 'header_bg_color' => isset($settings['styles']['header_bg_color']) ? $settings['styles']['header_bg_color'] : '#095E54',
                 'header_text_color' => isset($settings['styles']['header_text_color']) ? $settings['styles']['header_text_color'] : '#ffffff',
                 'body_bg_color' => isset($settings['styles']['body_bg_color']) ? $settings['styles']['body_bg_color'] : '#ffffff',
@@ -43,10 +44,10 @@ class WhatsappChat
     public function dummyMembers()
     {
         return array(
-            ['id'=>0, 'member_name'=>'John Doe', 'member_designation'=>'sales expert', 'member_image_url' => NINJAWHATSAPPCHAT_URL . 'public/images/chat/profile_01.jpg', 'member_status'=>'online', 'member_number'=> '018342344234'],
-            ['id'=>1, 'member_name'=>'John Don', 'member_designation'=>'technical support', 'member_image_url'=> NINJAWHATSAPPCHAT_URL . 'public/images/chat/profile_02.jpg' , 'member_status'=>'online', 'member_number'=> '017342344234'],
-            ['id'=>2, 'member_name'=>'John Done', 'member_designation'=>'customer support', 'member_image_url'=> NINJAWHATSAPPCHAT_URL . 'public/images/chat/profile_03.jpg' , 'member_status'=>'online', 'member_number'=> '019342344234'],
-            ['id'=>3, 'member_name'=>'John Do', 'member_designation'=>'marketing expert', 'member_image_url'=> NINJAWHATSAPPCHAT_URL . 'public/images/chat/profile_04.jpg', 'member_status'=>'online', 'member_number'=> '016342344234'],
+            ['id'=>0, 'member_name'=>'John Doe', 'member_designation'=>'sales expert', 'member_image_url' => NINJAWHATSAPPCHAT_URL . 'public/images/chat/profile01.png', 'member_status'=>'online', 'member_number'=> '018342344234'],
+            ['id'=>1, 'member_name'=>'John Don', 'member_designation'=>'technical support', 'member_image_url'=> NINJAWHATSAPPCHAT_URL . 'public/images/chat/profile02.png' , 'member_status'=>'online', 'member_number'=> '017342344234'],
+            ['id'=>2, 'member_name'=>'John Done', 'member_designation'=>'customer support', 'member_image_url'=> NINJAWHATSAPPCHAT_URL . 'public/images/chat/profile03.png' , 'member_status'=>'online', 'member_number'=> '019342344234'],
+            ['id'=>3, 'member_name'=>'John Do', 'member_designation'=>'marketing expert', 'member_image_url'=> NINJAWHATSAPPCHAT_URL . 'public/images/chat/profile04.png', 'member_status'=>'online', 'member_number'=> '016342344234'],
         );
     }
 }
