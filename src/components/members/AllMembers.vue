@@ -311,7 +311,7 @@
                 pageSizes: [5,10, 20, 30, 40, 50],
                 search_string: '',
                 members: [],
-                assets_url: window.NinjaWhatsappAdmin.assets_url
+                assets_url: window.NinjaLiveAdmin.assets_url
             }
         },
         methods: {
@@ -389,14 +389,14 @@
                 formData.append('member_designation', this.member.member_designation);
                 formData.append('member_status', this.member.member_status);
                 formData.append('file', this.member.member_image_file);
-                formData.append('action', 'ninja_whatsappchat_admin_ajax');
+                formData.append('action', 'ninja_livechat_admin_ajax');
                 formData.append('route', 'add_member');
                 this.adding = true;
                 let that = this;
                 jQuery.ajax({
                     type: "POST",
                     enctype: 'multipart/form-data',
-                    url: window.NinjaWhatsappAdmin.ajaxurl,
+                    url: window.NinjaLiveAdmin.ajaxurl,
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -468,14 +468,14 @@
                 formData.append('member_designation', this.member.member_designation);
                 formData.append('member_status', this.member.member_status);
                 formData.append('file', this.member.member_image_file);
-                formData.append('action', 'ninja_whatsappchat_admin_ajax');
+                formData.append('action', 'ninja_livechat_admin_ajax');
                 formData.append('route', 'update_member');
                 this.updating = true;
                 let that = this;
                 jQuery.ajax({
                     type: "POST",
                     enctype: 'multipart/form-data',
-                    url: window.NinjaWhatsappAdmin.ajaxurl,
+                    url: window.NinjaLiveAdmin.ajaxurl,
                     data: formData,
                     processData: false,
                     contentType: false,

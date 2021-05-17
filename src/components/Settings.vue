@@ -6,7 +6,7 @@
             <el-row class="setting_header">
                 <el-col :md="18">
                     <h2>
-                        Show Whatsapp Chat
+                        Show Live Chat
                         <el-tooltip class="item" effect="light" placement="bottom-start">
                             <template #content>
                                 <h3>Where to place the chat?</h3>

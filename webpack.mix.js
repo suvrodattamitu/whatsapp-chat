@@ -4,9 +4,9 @@ mix.setPublicPath('public');
 
 mix.setResourceRoot('../');
 
-mix.js('src/Boot.js', 'public/js/ninjawhatsappchat-boot.js')
-   .js('src/main.js', 'public/js/ninjawhatsappchat-admin.js').vue()
-   .sass('src/scss/common/whatsappchat.scss', 'public/css/whatsappchat.css')
-   .sass('src/scss/admin/app.scss', 'public/css/ninjawhatsappchat-admin.css')
+mix.js('src/Boot.js', 'public/js/ninjalivechat-boot.js')
+   .js('src/main.js', 'public/js/ninjalivechat-admin.js').vue()
+   .sass('src/scss/common/livechat.scss', 'public/css/livechat.css')
+   .sass('src/scss/admin/app.scss', 'public/css/ninjalivechat-admin.css')
    .copy('src/images', 'public/images')
    .copy('src/frontend', 'public/frontend');

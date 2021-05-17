@@ -165,8 +165,8 @@ export default {
         },
 
         reloadCss() {
-            let whatsappChatCss = this.generateCSS();
-            jQuery('#ninja_whatsapp_chat_dynamic_style').html(whatsappChatCss);  
+            let liveChatCss = this.generateCSS();
+            jQuery('#ninja_live_chat_dynamic_style').html(liveChatCss);  
         }
         //css generate end
     },

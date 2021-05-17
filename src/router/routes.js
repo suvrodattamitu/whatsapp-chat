@@ -40,9 +40,9 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
 
     if(to.meta){
-        document.title = 'Ninja Whatsapp Chat :: ' + to.meta.title;
+        document.title = 'Ninja Live Chat :: ' + to.meta.title;
     }else{
-        document.title = 'Ninja Whatsapp Chat';
+        document.title = 'Ninja Live Chat';
     }
 
     next();

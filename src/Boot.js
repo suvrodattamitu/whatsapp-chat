@@ -1,2 +1,2 @@
-import NinjaWhatsapp from './NinjaWhatsapp';
-window.NinjaWhatsapp = new NinjaWhatsapp();
+import NinjaLive from './NinjaLive';
+window.NinjaLive = new NinjaLive();

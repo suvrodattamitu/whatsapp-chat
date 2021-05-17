@@ -1,7 +1,7 @@
 <?php
 
-namespace NinjaWhatsapp\Views;
-use NinjaWhatsapp\Views\View;
+namespace NinjaLive\Views;
+use NinjaLive\Views\View;
 
 if (!defined('ABSPATH')) {
     exit;

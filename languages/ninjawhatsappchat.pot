@@ -1,7 +1,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Ninja Whatsapp Chat\n"
+"Project-Id-Version: Ninja Live Chat\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-05-13 14:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.5.2; wp-5.7.2\n"
-"X-Domain: ninjawhatsappchat"
+"X-Domain: ninjalivechat"
 
 #: app/Menu.php:124
 msgid "All Collections"
@@ -62,12 +62,12 @@ msgstr ""
 
 #. Name of the plugin
 #: app/Menu.php:35
-msgid "Ninja Whatsapp Chat"
+msgid "Ninja Live Chat"
 msgstr ""
 
 #. Description of the plugin
 msgid ""
-"Ninja Whatsapp Chat - is an fastest and easiest alternative to add business "
+"Ninja Live Chat - is an fastest and easiest alternative to add business "
 "countdown functionalities on your website."
 msgstr ""
 

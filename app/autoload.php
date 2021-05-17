@@ -2,14 +2,14 @@
 /**
  * Autoloader
  *
- * @package NinjaWhatsapp
+ * @package NinjaLive
  */
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
-if (!function_exists('NinjaWhatsappAutoload')) {
+if (!function_exists('NinjaLiveAutoload')) {
     /**
      * Plugin autoloader.
      *
@@ -17,9 +17,9 @@ if (!function_exists('NinjaWhatsappAutoload')) {
      * @since 1.0.0
      *
      */
-    function NinjaWhatsappAutoload($class)
+    function NinjaLiveAutoload($class)
     {
-        $namespace = 'NinjaWhatsapp';
+        $namespace = 'NinjaLive';
         if (strpos($class, $namespace) !== 0) {
             return;
         }
@@ -31,5 +31,5 @@ if (!function_exists('NinjaWhatsappAutoload')) {
             require $file;
         }
     }
-    spl_autoload_register('NinjaWhatsappAutoload');
+    spl_autoload_register('NinjaLiveAutoload');
 }

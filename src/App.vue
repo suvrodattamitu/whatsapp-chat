@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
       <div class="ninja_countdown_main_nav">
-          <span>{{ 'Ninja Whatsapp Chat' }}</span>
+          <span>{{ 'Ninja Live Chat' }}</span>
           <router-link v-for="menuItem in topMenus" :key="menuItem.route" 
           exact
           :to="{ name: menuItem.route }">

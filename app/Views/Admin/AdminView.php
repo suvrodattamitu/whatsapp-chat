@@ -1,2 +1,2 @@
-<style id='ninja_whatsapp_chat_dynamic_style'></style> 
-<div id='ninjawhatsappchat-app'></div>
+<style id='ninja_live_chat_dynamic_style'></style> 
+<div id='ninjalivechat-app'></div>

@@ -30,7 +30,7 @@ export default {
     
     data() {
         return {
-            assets_url: window.NinjaWhatsappAdmin.assets_url,
+            assets_url: window.NinjaLiveAdmin.assets_url,
             items: {
                 support1: {
                     title: 'Need Help?',

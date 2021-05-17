@@ -1,8 +1,8 @@
 <?php
 
-namespace NinjaWhatsapp\Views;
-use NinjaWhatsapp\Views\View;
-use NinjaWhatsapp\Model\WhatsappChat;
+namespace NinjaLive\Views;
+use NinjaLive\Views\View;
+use NinjaLive\Model\LiveChat;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -22,7 +22,7 @@ class FrontendApp
 
         $page_id = get_the_ID();
 
-        $checked_pages = get_option('ninja_whatsappchat_checked_pages',array());
+        $checked_pages = get_option('ninja_livechat_checked_pages',array());
         
         $all_pages = in_array('-1', $checked_pages);
         $specific_page = in_array($page_id, $checked_pages);
@@ -30,8 +30,8 @@ class FrontendApp
         $showChat = $all_pages || $specific_page;
     
         if( $showChat ) { 
-            $configs = get_option('ninja_whatsapp_chat_configs', array());
-            $configs = (new WhatsappChat())->formatConfigs($configs);
+            $configs = get_option('ninja_live_chat_configs', array());
+            $configs = (new LiveChat())->formatConfigs($configs);
 
             global $wpdb;
             $tablename = $wpdb->prefix . "ninja_chats";
@@ -42,39 +42,39 @@ class FrontendApp
             }
 
             if( empty($allMembers) ) {
-                $allMembers = (new WhatsappChat())->dummyMembers();
+                $allMembers = (new LiveChat())->dummyMembers();
             }
 
-            wp_enqueue_style('ninjawhatsappchat', NINJAWHATSAPPCHAT_URL . 'public/css/whatsappchat.css', array(), NINJAWHATSAPPCHAT_VERSION);
+            wp_enqueue_style('ninjalivechat', NINJALIVECHAT_URL . 'public/css/livechat.css', array(), NINJALIVECHAT_VERSION);
             $css = self::generateCSS( $configs );
             add_action('wp_head', function () use ($css) {
                 echo $css;
             });
 
             wp_enqueue_script(
-                'ninjawhatsappchat',
-                NINJAWHATSAPPCHAT_URL . 'public/frontend/'.$configs['layouts']['layout'].'.js',
+                'ninjalivechat',
+                NINJALIVECHAT_URL . 'public/frontend/'.$configs['layouts']['layout'].'.js',
                 array( 'jquery' ),
-                NINJAWHATSAPPCHAT_VERSION,
+                NINJALIVECHAT_VERSION,
                 true
             );
 
             wp_enqueue_script(
-                'ninjawhatsappchat_manager',
-                NINJAWHATSAPPCHAT_URL . 'public/frontend/whatsappchat_manager.js',
+                'ninjalivechat_manager',
+                NINJALIVECHAT_URL . 'public/frontend/livechat_manager.js',
                 array( 'jquery' ),
-                NINJAWHATSAPPCHAT_VERSION,
+                NINJALIVECHAT_VERSION,
                 true
             );
                 
-            return static::getWhatsappChatHTML(['configs' => $configs, 'members' => $allMembers]);
+            return static::getLiveChatHTML(['configs' => $configs, 'members' => $allMembers]);
         }
         return;
     }
 
-    public static function getWhatsappChatHTML($data)
+    public static function getLiveChatHTML($data)
     {
-        View::render('Frontend.WhatsappChat',$data);
+        View::render('Frontend.LiveChat',$data);
     }
 
     public static function generateCSS($configs)

@@ -1,6 +1,6 @@
 <?php
 
-namespace NinjaWhatsapp\Database;
+namespace NinjaLive\Database;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
  */
 class Activator
 {
-    public $DBVersion = NINJAWHATSAPPCHAT_DB_VERSION;
+    public $DBVersion = NINJALIVECHAT_DB_VERSION;
 
     public function migrateDatabases($network_wide = false)
     {

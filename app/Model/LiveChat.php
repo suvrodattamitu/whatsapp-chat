@@ -1,6 +1,6 @@
 <?php
 
-namespace NinjaWhatsapp\Model;
+namespace NinjaLive\Model;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -10,12 +10,12 @@ if (!defined('ABSPATH')) {
  * Base Model Class
  * @since 1.0.0
  */
-class WhatsappChat
+class LiveChat
 {
     public function formatConfigs($settings = array())
     {
         return array(
-            'platform' => 'whatsapp',
+            'platform' => 'live',
             'layouts'  => array(
                 'layout' => isset($settings['layouts']['layout']) ? $settings['layouts']['layout'] : 'design2',
             ),
@@ -44,10 +44,10 @@ class WhatsappChat
     public function dummyMembers()
     {
         return array(
-            ['id'=>0, 'member_name'=>'Jessie Doe', 'member_designation'=>'Sales Expert', 'member_image_url' => NINJAWHATSAPPCHAT_URL . 'public/images/chat/profile01.png', 'member_status'=>'online', 'member_number'=> '018342344234'],
-            ['id'=>1, 'member_name'=>'John Doe', 'member_designation'=>'Technical Support', 'member_image_url'=> NINJAWHATSAPPCHAT_URL . 'public/images/chat/profile02.png' , 'member_status'=>'online', 'member_number'=> '017342344234'],
-            ['id'=>2, 'member_name'=>'John Done', 'member_designation'=>'Customer Support', 'member_image_url'=> NINJAWHATSAPPCHAT_URL . 'public/images/chat/profile03.png' , 'member_status'=>'online', 'member_number'=> '019342344234'],
-            ['id'=>3, 'member_name'=>'John Do', 'member_designation'=>'Marketing Expert', 'member_image_url'=> NINJAWHATSAPPCHAT_URL . 'public/images/chat/profile04.png', 'member_status'=>'online', 'member_number'=> '016342344234'],
+            ['id'=>0, 'member_name'=>'Jessie Doe', 'member_designation'=>'Sales Expert', 'member_image_url' => NINJALIVECHAT_URL . 'public/images/chat/profile01.png', 'member_status'=>'online', 'member_number'=> '018342344234'],
+            ['id'=>1, 'member_name'=>'John Doe', 'member_designation'=>'Technical Support', 'member_image_url'=> NINJALIVECHAT_URL . 'public/images/chat/profile02.png' , 'member_status'=>'online', 'member_number'=> '017342344234'],
+            ['id'=>2, 'member_name'=>'John Done', 'member_designation'=>'Customer Support', 'member_image_url'=> NINJALIVECHAT_URL . 'public/images/chat/profile03.png' , 'member_status'=>'online', 'member_number'=> '019342344234'],
+            ['id'=>3, 'member_name'=>'John Do', 'member_designation'=>'Marketing Expert', 'member_image_url'=> NINJALIVECHAT_URL . 'public/images/chat/profile04.png', 'member_status'=>'online', 'member_number'=> '016342344234'],
         );
     }
 }

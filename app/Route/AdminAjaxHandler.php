@@ -1,7 +1,7 @@
 <?php
 
-namespace NinjaWhatsapp\Route;
-use NinjaWhatsapp\Model\WhatsappChat;
+namespace NinjaLive\Route;
+use NinjaLive\Model\LiveChat;
 
 if (!defined('ABSPATH')) {
     exit;
@@ -18,7 +18,7 @@ class AdminAjaxHandler
      **/
     public function registerEndpoints()
     {
-        add_action('wp_ajax_ninja_whatsappchat_admin_ajax', array($this, 'handeEndPoint'));
+        add_action('wp_ajax_ninja_livechat_admin_ajax', array($this, 'handeEndPoint'));
     }
 
     /**
@@ -58,15 +58,15 @@ class AdminAjaxHandler
 
     public function getChatConfigs() 
     {
-        $chatConfigs = get_option('ninja_whatsapp_chat_configs', array());
-        $chatConfigs = (new WhatsappChat())->formatConfigs($chatConfigs);
+        $chatConfigs = get_option('ninja_live_chat_configs', array());
+        $chatConfigs = (new LiveChat())->formatConfigs($chatConfigs);
 
         global $wpdb;
         $tablename = $wpdb->prefix . "ninja_chats";
         $allMembers = $wpdb->get_results("SELECT * FROM $tablename");
 
         if( empty($allMembers) ) {
-            $allMembers = (new WhatsappChat())->dummyMembers();
+            $allMembers = (new LiveChat())->dummyMembers();
         }
         
         wp_send_json_success([
@@ -79,23 +79,23 @@ class AdminAjaxHandler
     {
         $chatConfigsJson = sanitize_text_field($_REQUEST['configs']);
         $chatConfigs = json_decode( wp_unslash($chatConfigsJson), true);
-        $chatConfigs = (new WhatsappChat())->formatConfigs($chatConfigs);
-        update_option('ninja_whatsapp_chat_configs',$chatConfigs);
+        $chatConfigs = (new LiveChat())->formatConfigs($chatConfigs);
+        update_option('ninja_live_chat_configs',$chatConfigs);
         wp_send_json_success([
-            'message'   => __('Congrats, successfully saved!', 'ninjawhatsappchat'),
+            'message'   => __('Congrats, successfully saved!', 'ninjalivechat'),
             'configs'   => $configs
         ], 200);
     }
 
     public static function getSettings()
     {
-        $checked_pages = get_option('ninja_whatsappchat_checked_pages',array());
+        $checked_pages = get_option('ninja_livechat_checked_pages',array());
 
         $pages = get_pages();
-        $page_list = array(array('page_id' => '-1', 'page_title' => __('All Pages', 'ninjawhatsappchat')));
+        $page_list = array(array('page_id' => '-1', 'page_title' => __('All Pages', 'ninjalivechat')));
         if (!empty($pages) && !is_wp_error($pages)) {
             foreach ($pages as $page) {
-                $page_list[] = array('page_id' => $page->ID . '', 'page_title' => $page->post_title ? $page->post_title : __('Untitled', 'ninjawhatsappchat'));
+                $page_list[] = array('page_id' => $page->ID . '', 'page_title' => $page->post_title ? $page->post_title : __('Untitled', 'ninjalivechat'));
             }
         }
         wp_send_json_success([
@@ -108,18 +108,18 @@ class AdminAjaxHandler
     {
         $checkedPagesJson = sanitize_text_field($_REQUEST['checked_pages']);
         $checkedPages = json_decode(wp_unslash($checkedPagesJson), true);
-        update_option('ninja_whatsappchat_checked_pages',$checkedPages);
+        update_option('ninja_livechat_checked_pages',$checkedPages);
         wp_send_json_success([
-            'message'   => __('Congrats, successfully saved!', 'ninjawhatsappchat'),
+            'message'   => __('Congrats, successfully saved!', 'ninjalivechat'),
             'checked_pages'   => $checkedPages
         ], 200);
     }
 
     public function clearConfigs()
     {
-        delete_option('ninja_whatsapp_chat_configs');
+        delete_option('ninja_live_chat_configs');
         wp_send_json_success([
-            'message'   => __('Congrats, successfully cleared!', 'ninjawhatsappchat')
+            'message'   => __('Congrats, successfully cleared!', 'ninjalivechat')
         ], 200); 
     }
 
@@ -128,7 +128,7 @@ class AdminAjaxHandler
         unset($fields['action']);
         unset($fields['route']);
         unset($fields['file']);
-        unset($member['id']);
+        unset($fields['id']);
 
         $validator = array();
 
@@ -157,6 +157,11 @@ class AdminAjaxHandler
         $member = $_REQUEST;
         $uploadedfile = isset( $_FILES['file'] ) ? $_FILES['file'] : null;
 
+        //validated and sanitized files fields
+        if( !empty($uploadedfile) ) {
+            $uploadedfile['name'] = sanitize_file_name( $uploadedfile['name'] );
+        }
+
         //validated and sanitized input fields
         $member = $this->validate($member);
 
@@ -174,7 +179,7 @@ class AdminAjaxHandler
 
             if (!in_array($uploadedfile['type'], $acceptedFilles)) {
                 wp_send_json_error([
-                    'message' => __('Please upload only jpg/png format files', 'ninjawhatsappchat')
+                    'message' => __('Please upload only jpg/png format files', 'ninjalivechat')
                 ], 423);
             }
 
@@ -194,7 +199,7 @@ class AdminAjaxHandler
         $tablename = $wpdb->prefix.'ninja_chats';
         $wpdb->insert( $tablename, $member );
         wp_send_json_success([
-            'message'    => __('Member added successfully!', 'ninjawhatsappchat'),
+            'message'    => __('Member added successfully!', 'ninjalivechat'),
             'member'    => $member,
         ], 200);
     }
@@ -222,7 +227,7 @@ class AdminAjaxHandler
         $tablename = $wpdb->prefix . "ninja_chats";
         $wpdb->delete( $tablename, array( 'id' => $memberId ) );
         wp_send_json_success([
-            'message'  => __('Member deleted successfully!', 'ninjawhatsappchat')
+            'message'  => __('Member deleted successfully!', 'ninjalivechat')
         ], 200);
     }
 
@@ -233,7 +238,7 @@ class AdminAjaxHandler
         $tablename = $wpdb->prefix . "ninja_chats";
         $member = $wpdb->get_row( "SELECT * FROM $tablename WHERE id = '$memberId'" );
         wp_send_json_success([
-            'message'  => __('Success!', 'ninjawhatsappchat'),
+            'message'  => __('Success!', 'ninjalivechat'),
             'member'   => $member
         ], 200);
     }
@@ -255,6 +260,10 @@ class AdminAjaxHandler
             }
 
             if( !empty($uploadedfile) ) {
+                //validated and sanitized files fields
+                if( !empty($uploadedfile) ) {
+                    $uploadedfile['name'] = sanitize_file_name( $uploadedfile['name'] );
+                }
                 $acceptedFilles = array(
                     'image/png',
                     'image/jpeg'
@@ -278,7 +287,7 @@ class AdminAjaxHandler
             
             $wpdb->update( $tablename, $member,  array( 'id' => $memberId ) );
             wp_send_json_success([
-                'message'    => __('Member updated successfully!', 'ninjawhatsappchat'),
+                'message'    => __('Member updated successfully!', 'ninjalivechat'),
                 'member'    => $member,
             ], 200);
         }
@@ -293,7 +302,7 @@ class AdminAjaxHandler
         unset($member['id']);
         $wpdb->insert( $tablename, $member );
         wp_send_json_success([
-            'message'    => __('Member duplicated successfully!', 'ninjawhatsappchat')
+            'message'    => __('Member duplicated successfully!', 'ninjalivechat')
         ], 200);
     } 
 }
