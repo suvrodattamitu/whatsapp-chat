@@ -1,6 +1,6 @@
 === Ninja whatsapp chat Builder | Fastest whatsapp chat Builder ===
 Contributors: lovelightplugins
-Tags: whatsapp, whatsapp chat Builder, whatsapp , chat
+Tags: whatsapp, whatsapp chat Builder, whatsapp , chat, whatsapp chat
 Requires at least: 3.4
 Tested up to: 5.7.1
 Stable tag: 1.0.0
@@ -31,8 +31,12 @@ Yes, You can add members as your wish.
 == Screenshots ==
 
 1. Completely customizable with live preview editor.
-2. Show the Whatsapp Chat in specific Page
-3. Your customized Whatsapp Chat in frontend
+2. Design : Layout One
+3. Design : Layout Two
+4. Design : Layout Three
+5. Add Multiple Chat Members 
+6. Show the Whatsapp Chat in specific Page
+7. Your customized Whatsapp Chat in frontend
 
 == Changelog ==
 

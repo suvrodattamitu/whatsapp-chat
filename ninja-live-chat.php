@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Ninja Whatsapp Chat
+ * Plugin Name: Ninja Live Chat
  * Plugin URI: 
- * Description: Ninja Whatsapp Chat - is an fastest and easiest alternative to add business countdown functionalities on your website.
+ * Description: Ninja Live Chat - is an fastest and easiest alternative to add whatsapp chat functionalities on your website.
  * Author: Light Plugins
  * Author URI: 
  * License: GPLv2 or later
@@ -17,7 +17,7 @@ if (!defined('ABSPATH')) {
 if (!defined('NINJAWHATSAPPCHAT_VERSION')) {
     
     define('NINJAWHATSAPPCHAT_VERSION', '1.0.0');
-    define('NINJAWHATSAPPCHAT_DB_VERSION', 120);
+    define('NINJAWHATSAPPCHAT_DB_VERSION', 211);
     define('NINJAWHATSAPPCHAT_MAIN_FILE', __FILE__);
     define('NINJAWHATSAPPCHAT_BASENAME', plugin_basename(__FILE__));
     define('NINJAWHATSAPPCHAT_URL', plugin_dir_url(__FILE__));

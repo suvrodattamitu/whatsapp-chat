@@ -18,14 +18,14 @@
             </el-col>
         </el-row>
 
-        <el-row>
+        <!-- <el-row>
             <el-col :span="24">
                 <div class="ninja_countdown_item">
                     <label class="ninja_countdown_label">BUTTON TEXT</label>
                     <el-input type="text" v-model="chat_contents.chat_bubble.button_text" size="mini"></el-input>
                 </div>
             </el-col>
-        </el-row>
+        </el-row> -->
     </div>
 </template>
 
