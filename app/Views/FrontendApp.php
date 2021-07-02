@@ -21,14 +21,12 @@ class FrontendApp
 		}
 
         $page_id = get_the_ID();
-
         $checked_pages = get_option('ninja_livechat_checked_pages',array());
         
         $all_pages = in_array('-1', $checked_pages);
         $specific_page = in_array($page_id, $checked_pages);
 
         $showChat = $all_pages || $specific_page;
-    
         if( $showChat ) { 
             $configs = get_option('ninja_live_chat_configs', array());
             $configs = (new LiveChat())->formatConfigs($configs);
@@ -51,24 +49,12 @@ class FrontendApp
                 echo $css;
             });
 
-            wp_enqueue_script(
-                'ninjalivechat',
-                NINJALIVECHAT_URL . 'public/frontend/'.$configs['layouts']['layout'].'.js',
-                array( 'jquery' ),
-                NINJALIVECHAT_VERSION,
-                true
-            );
-
-            wp_enqueue_script(
-                'ninjalivechat_manager',
-                NINJALIVECHAT_URL . 'public/frontend/livechat_manager.js',
-                array( 'jquery' ),
-                NINJALIVECHAT_VERSION,
-                true
-            );
+            wp_enqueue_script('ninjalivechat', NINJALIVECHAT_URL . 'public/frontend/'.$configs['layouts']['layout'].'.js', array( 'jquery' ), NINJALIVECHAT_VERSION, true);
+            wp_enqueue_script( 'ninjalivechat_manager', NINJALIVECHAT_URL . 'public/frontend/livechat_manager.js', array( 'jquery' ), NINJALIVECHAT_VERSION, true);
                 
             return static::getLiveChatHTML(['configs' => $configs, 'members' => $allMembers]);
         }
+        
         return;
     }
 
@@ -80,9 +66,7 @@ class FrontendApp
     public static function generateCSS($configs)
     {
 		?>
-
         <style type="text/css">
-
             .ninja-chat-box .ninja-chat-header {
                 background: <?php echo $configs['styles']['header_bg_color'].'!important'; ?>;
                 color: <?php echo $configs['styles']['header_text_color'].'!important'; ?>;
@@ -91,19 +75,16 @@ class FrontendApp
                 background:<?php echo $configs['styles']['button_bg_color'] .'!important'; ?>;
                 color:<?php echo $configs['styles']['button_text_color'] .'!important'; ?>;
             }
-
             .ninja-chat-box .ninja-chat-body{
                 background: <?php echo $configs['styles']['body_bg_color'].'!important'; ?>;
             }
             .ninja-chat-box .ninja-chat-body .ninja-member-details{
                 color: <?php echo $configs['styles']['body_text_color'].'!important'; ?>;
             }
-            .wc-design2 .ninja-floating-button {
+            .ninja-chat-design2 .ninja-floating-button {
                 top: <?php echo $configs['styles']['button_position'].'% !important'; ?>
             }
-
         </style>
-
 		<?php
     }
 }

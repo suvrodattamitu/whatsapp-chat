@@ -5,14 +5,12 @@
 .ninja-member-status-online{
 	background: rgb(13, 192, 28);
 }
-
 .ninja-floating-button{
 	background: #fff;
 	display: flex;
     align-items: center;
     justify-content: center
 }
-
 //chat button
 .ninja-floating-button{
 	position: fixed;
@@ -32,7 +30,6 @@
 	margin-top: 13px;
 	font-size: 25px;
 }
-
 //chat panel box
 .ninja-chat-box{
 	display: none;
@@ -44,7 +41,6 @@
 	box-shadow: 0px 3px 7px rgba(12, 12, 12, 0.18);
 	z-index: 9;
 }
-
 /* Panel Header Content */
 .ninja-chat-header{
 	padding: 12px 15px 15px;
@@ -60,7 +56,6 @@
 	font-size: 12px;
 	line-height: 20px;
 }
-
 /* Panel Body Content */
 .ninja-chat-box .ninja-chat-body{
 	padding: 20px 20px 15px;
@@ -70,16 +65,14 @@
 	overflow-y: auto;
 	background: #fff;
 }
-
 .ninja-chat-body .ninja-member-area:hover{
     text-decoration: none;
     cursor: pointer;
 }
-
 .ninja-chat-body .ninja-member-area{
     display: flex;
+	text-decoration: none !important;
 }
-
 /* Panel Body Content */
 .ninja-chat-design3 .ninja-chat-body{
 	display: flex;
@@ -130,4 +123,3 @@
 	font-size: 11px;
 	line-height: 10px;
 }
-

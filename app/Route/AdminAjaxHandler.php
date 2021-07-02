@@ -68,7 +68,6 @@ class AdminAjaxHandler
         if( empty($allMembers) ) {
             $allMembers = (new LiveChat())->dummyMembers();
         }
-        
         wp_send_json_success([
             'configs'   => $chatConfigs,
             'members'   => $allMembers
@@ -125,76 +124,26 @@ class AdminAjaxHandler
 
     public function validate($fields)
     {
-        unset($fields['action']);
-        unset($fields['route']);
-        unset($fields['file']);
         unset($fields['id']);
+        unset($fields['member_image_url']);
 
         $validator = array();
-
         foreach($fields as $key => $field) {
             if( empty($field) ) {
                 $validator[$key] = ucfirst(str_replace('member_','',$key)). ' field is required';
             }
         }
 
-        $sanitizedMember = array();
-        foreach($fields as $key => $field) {
-            if( !empty($field) ) {
-                $sanitizedMember[$key] = sanitize_text_field($field);
-            }
-        }
-
         if( !empty($validator) ) {
             wp_send_json_error($validator,423);
         }
-
-        return $sanitizedMember;
     }
 
     public function addMember() 
-    {   
-        $member = $_REQUEST;
-        $uploadedfile = isset( $_FILES['file'] ) ? $_FILES['file'] : null;
-
-        //validated and sanitized files fields
-        if( !empty($uploadedfile) ) {
-            $uploadedfile['name'] = sanitize_file_name( $uploadedfile['name'] );
-        }
-
-        //validated and sanitized input fields
-        $member = $this->validate($member);
-
-        $member['member_image_url'] = '';
-
-        if( !empty($uploadedfile) ) {
-            if (!function_exists('wp_handle_upload')) {
-                require_once(ABSPATH . 'wp-admin/includes/file.php');
-            }
-
-            $acceptedFilles = array(
-                'image/png',
-                'image/jpeg'
-            );
-
-            if (!in_array($uploadedfile['type'], $acceptedFilles)) {
-                wp_send_json_error([
-                    'message' => __('Please upload only jpg/png format files', 'ninjalivechat')
-                ], 423);
-            }
-
-            $upload_overrides = array('test_form' => false);
-            $movefile = wp_handle_upload($uploadedfile, $upload_overrides);
-
-            if (isset($movefile['error'])) {
-                wp_send_json_error([
-                    'message' => $movefile['error']
-                ], 423);
-            }
-
-            $member['member_image_url'] = $movefile['url'];
-        }
-
+    {  
+        $member = sanitize_text_field($_REQUEST['member']);
+        $member = json_decode(wp_unslash($member), true);
+        $this->validate($member);
         global $wpdb;
         $tablename = $wpdb->prefix.'ninja_chats';
         $wpdb->insert( $tablename, $member );
@@ -245,46 +194,18 @@ class AdminAjaxHandler
 
     public function updateMember()
     {
-        $member = $_REQUEST;
-        $uploadedfile = isset($_FILES['file']) ? $_FILES['file'] : null;
-        
+        $member = sanitize_text_field($_REQUEST['member']);   
+        $member = json_decode( wp_unslash($member), true);
+
         if( isset($member['id']) && !empty($member['id'])) {
-
             $memberId = (int)$member['id'];
+            unset($member['created_at']);
+            unset($member['updated_at']);
 
-            //validated and sanitized input fields
-            $member = $this->validate($member);
-            
-            if (!function_exists('wp_handle_upload')) {
-                require_once(ABSPATH . 'wp-admin/includes/file.php');
-            }
-
-            if( !empty($uploadedfile) ) {
-                //validated and sanitized files fields
-                if( !empty($uploadedfile) ) {
-                    $uploadedfile['name'] = sanitize_file_name( $uploadedfile['name'] );
-                }
-                $acceptedFilles = array(
-                    'image/png',
-                    'image/jpeg'
-                );       
-
-                if (!in_array($uploadedfile['type'], $acceptedFilles)) {
-                    wp_send_json(__('Please upload only jpg/png format files', 'wpsocialreviews'), 423);
-                }
-
-                $upload_overrides = array('test_form' => false);
-
-                $movefile = wp_handle_upload($uploadedfile, $upload_overrides);
-
-                if ($movefile && !isset($movefile['error'])) {
-                    $member['member_image_url'] = $movefile['url'];
-                }
-            }
+            $this->validate($member);
 
             global $wpdb;
             $tablename = $wpdb->prefix.'ninja_chats';
-            
             $wpdb->update( $tablename, $member,  array( 'id' => $memberId ) );
             wp_send_json_success([
                 'message'    => __('Member updated successfully!', 'ninjalivechat'),

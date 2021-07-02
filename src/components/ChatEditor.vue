@@ -158,7 +158,7 @@ export default {
                 .ninja-chat-box .ninja-chat-body .ninja-member-details{
                     color: ${configs.styles.body_text_color} !important;
                 }
-                .wc-design2 .ninja-floating-button {
+                .ninja-chat-design2 .ninja-floating-button {
                     top: ${configs.styles.button_position}% !important;
                 }
             `

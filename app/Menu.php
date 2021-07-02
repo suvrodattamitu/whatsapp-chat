@@ -106,7 +106,6 @@ class Menu
     public function enqueueAssets()
     {
         if (isset($_GET['page']) && $_GET['page'] == 'ninjalivechat') {
-
             wp_enqueue_style('ninjalivechat_admin_app', NINJALIVECHAT_URL . 'public/css/ninjalivechat-admin.css', array(), NINJALIVECHAT_VERSION);
             wp_enqueue_style('ninjalivechat_app', NINJALIVECHAT_URL . 'public/css/livechat.css', array(), NINJALIVECHAT_VERSION);
 
@@ -116,15 +115,15 @@ class Menu
             do_action('ninjalivechat/booting_admin_app');
 
             wp_enqueue_script('ninjalivechat_admin_app', NINJALIVECHAT_URL . 'public/js/ninjalivechat-admin.js', array('ninjalivechat_boot'), NINJALIVECHAT_VERSION, true);
-
+            
+            wp_enqueue_editor();
+            wp_enqueue_media();
             $ninjalivechatAdminVars = apply_filters('ninjalivechat/admin_app_vars', array(
-
                 'i18n' => array(
                     'All Collections' => __('All Collections', 'ninjalivechat')
                 ),
                 'assets_url' => NINJALIVECHAT_URL . 'public',
                 'ajaxurl' => admin_url('admin-ajax.php'),
-
             ));
 
             wp_localize_script('ninjalivechat_boot', 'NinjaLiveAdmin', $ninjalivechatAdminVars);

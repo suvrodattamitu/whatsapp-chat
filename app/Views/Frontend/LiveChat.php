@@ -5,7 +5,6 @@
 			<strong><?php echo esc_html($configs['chat_contents']['chat_header']['description']); ?></strong>
 		</div>
 		<div class="ninja-chat-body">	
-
             <?php foreach($members as $member): ?>
                 <a class="ninja-member-area" number="<?php echo esc_html($member['member_number']); ?>">
                     <div class="ninja-avatar-container ninja-member-status-<?php echo esc_html($member['member_status']); ?>">
@@ -22,7 +21,6 @@
                     </div>
                 </a>
             <?php endforeach; ?>
-
 		</div>
 	</div>
 	<div class="ninja-floating-button show_hide">

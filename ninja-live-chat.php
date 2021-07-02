@@ -2,11 +2,11 @@
 /**
  * Plugin Name: Ninja Live Chat
  * Plugin URI: 
- * Description: Ninja Live Chat - is an fastest and easiest alternative to add chat functionalities on your website.
+ * Description: Ninja Live Chat - is the fastest and easiest alternative to add chat functionalities on your website.
  * Author: Light Plugins
  * Author URI: 
  * License: GPLv2 or later
- * Version: 1.0.0
+ * Version: 1.1.0
  * Text Domain: ninjalivechat
 */
 
@@ -15,8 +15,7 @@ if (!defined('ABSPATH')) {
 }
 
 if (!defined('NINJALIVECHAT_VERSION')) {
-    
-    define('NINJALIVECHAT_VERSION', '1.0.0');
+    define('NINJALIVECHAT_VERSION', '1.1.0');
     define('NINJALIVECHAT_DB_VERSION', 211);
     define('NINJALIVECHAT_MAIN_FILE', __FILE__);
     define('NINJALIVECHAT_BASENAME', plugin_basename(__FILE__));
@@ -71,6 +70,9 @@ if (!defined('NINJALIVECHAT_VERSION')) {
 
         public function publicHooks()
         {
+            if (defined('ELEMENTOR_VERSION')) {
+                new \NinjaLive\Widgets\ElementorHelper();
+            }
             add_action('wp_footer', array((new \NinjaLive\Views\FrontendApp()), 'render'));
         }
     }

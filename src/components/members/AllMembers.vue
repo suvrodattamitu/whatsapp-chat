@@ -137,10 +137,13 @@
                             <p class="error-msg" v-if="errors && errors.member_number"> {{ errors.member_number }} </p>
                         </el-form-item>
                         <el-form-item label="Image" :label-width="formLabelWidth">
-                            <input type="file" class="form-control" id="add-file" @change="onInputChange($event)" />
-                            <div class="form-img-area" v-if="member.member_image_url">
-                                <img height="80" width="80" :src="member.member_image_url" />
-                            </div>
+                            <photo-widget
+                                btn_type="primary"
+                                :btn_text="'Select File'"
+                                :btn_mode="true"
+                                @changed="updateAvatar"
+                                v-model="member.member_image_url"
+                            />
                         </el-form-item>
                         <el-form-item label="Status" :label-width="formLabelWidth" size="mini">
                             <el-select v-model="member.member_status" placeholder="Select" size="mini">
@@ -187,10 +190,13 @@
                             <p class="error-msg" v-if="errors && errors.member_number"> {{ errors.member_number }} </p>
                         </el-form-item>
                         <el-form-item label="Image" :label-width="formLabelWidth">
-                            <input type="file" class="form-control" id="edit-file" @change="onInputChange($event)" />
-                            <div class="form-img-area" v-if="member.member_image_url">
-                                <img height="80" width="80" :src="member.member_image_url" />
-                            </div>
+                            <photo-widget
+                                btn_type="primary"
+                                :btn_text="'Select File'"
+                                :btn_mode="true"
+                                @changed="updateAvatar"
+                                v-model="member.member_image_url"
+                            />
                         </el-form-item>
                         <el-form-item label="Status" :label-width="formLabelWidth" size="mini">
                             <el-select v-model="member.member_status" placeholder="Select" size="mini">
@@ -243,7 +249,6 @@
             margin:15px 0px;
         }
         .ninja_feed_table{
-            
             .ninja_table_actions{
                 display: flex;
                 margin:15px 0px;
@@ -251,10 +256,8 @@
                 justify-content: space-between;
                 .nina_search_action{
                     display:flex;
-                    
                 }
             }
-
         }
         .ninja_row_actions{
             a{
@@ -264,13 +267,17 @@
                    color:#ff0000; 
                 }
             }
-            
         }
     }
 </style>
 
-<script>
+<script type="text/babel">
+    import PhotoWidget from '../editor-ui/pieces/PhotoWidget.vue';
+
     export default {
+        components: {
+            PhotoWidget
+        },
         data() {
             return {
                 errors:[],
@@ -281,7 +288,6 @@
                     member_designation: '',
                     member_number: '',
                     member_status: 'online',
-                    member_image_file: null,
                     member_image_url: null
                 },
                 member_statuses:[
@@ -315,19 +321,9 @@
             }
         },
         methods: {
-            //for image file
-            onInputChange(event) {
-                const file = event.target.files[0];
-                this.member.member_image_file = file;
-                let that = this;
-                let reader = new FileReader();
-                reader.onload = (event) => {
-                    // The file's text will be printed here
-                    that.member.member_image_url = event.target.result;
-                };
-                reader.readAsDataURL(file);
+            updateAvatar(url) {
+            
             },
-
             //multiple select
             handleSelectionChange(val) {
                 this.multipleSelection = val;
@@ -343,12 +339,10 @@
             },
             handleAddClose(){
                 this.showAddFormModal = false;
-                document.getElementById("add-file").value=""; 
                 this.emptyMember();
             },
             handleEditClose() {
                 this.showEditFormModal = false;
-                document.getElementById("edit-file").value=""; 
                 this.emptyMember();
             },
             confirmDeleteFeed(feed) {
@@ -383,45 +377,26 @@
                 this.deletingMember = {}
             },
             addMember() {
-                const formData = new FormData();
-                formData.append('member_name', this.member.member_name);
-                formData.append('member_number', this.member.member_number);
-                formData.append('member_designation', this.member.member_designation);
-                formData.append('member_status', this.member.member_status);
-                formData.append('file', this.member.member_image_file);
-                formData.append('action', 'ninja_livechat_admin_ajax');
-                formData.append('route', 'add_member');
                 this.adding = true;
-                let that = this;
-                jQuery.ajax({
-                    type: "POST",
-                    enctype: 'multipart/form-data',
-                    url: window.NinjaLiveAdmin.ajaxurl,
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    cache: false,
-                    timeout: 800000,
-                    success: function (response) {
+                this.$adminPost({
+                    route: 'add_member',
+                    member: JSON.stringify(this.member)
+                }).then(response => {
                         if( response.data ) {
-                            that.showAddFormModal = false;
-                            that.emptyMember();
-                            that.getAllMembers();
-                            that.$message({
+                            this.showAddFormModal = false;
+                            this.emptyMember();
+                            this.getAllMembers();
+                            this.$message({
                                 showClose: true,
                                 message: response.data.message,
                                 type: 'success'
                             });
-                            document.getElementById("add-file").value=""; 
                         }
-                    },
-                    error: function (errors) {
-                        that.errors = errors.responseJSON.data;
-                    },
-                    complete: function() {
-                        that.adding = false;
-                    }
-                });
+                    }).fail(errors => {
+                        this.errors = errors.responseJSON.data;
+                    }).always(() => {
+                        this.adding = false;
+                    });
             },
             getAllMembers(){
                 this.loading = true
@@ -461,46 +436,26 @@
                     });
             },
             updateMember() {
-                const formData = new FormData();
-                formData.append('id', this.member.id);
-                formData.append('member_name', this.member.member_name);
-                formData.append('member_number', this.member.member_number);
-                formData.append('member_designation', this.member.member_designation);
-                formData.append('member_status', this.member.member_status);
-                formData.append('file', this.member.member_image_file);
-                formData.append('action', 'ninja_livechat_admin_ajax');
-                formData.append('route', 'update_member');
                 this.updating = true;
-                let that = this;
-                jQuery.ajax({
-                    type: "POST",
-                    enctype: 'multipart/form-data',
-                    url: window.NinjaLiveAdmin.ajaxurl,
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    cache: false,
-                    timeout: 800000,
-                    success: function (response) {
+                this.$adminPost({
+                    route: 'update_member',
+                    member: JSON.stringify(this.member)
+                }).then(response => {
                         if( response.data ) {
-                            that.showEditFormModal = false;
-                            that.emptyMember();
-                            that.getAllMembers();
-                            that.$message({
+                            this.showEditFormModal = false;
+                            this.emptyMember();
+                            this.getAllMembers();
+                            this.$message({
                                 showClose: true,
                                 message: response.data.message,
                                 type: 'success'
                             });
-                            document.getElementById("edit-file").value=""; 
                         }
-                    },
-                    error: function (errors) {
-                        that.errors = errors.responseJSON.data;
-                    },
-                    complete: function() {
-                        that.updating = false;
-                    }
-                });
+                    }).fail(errors => {
+                        this.errors = errors.responseJSON.data;
+                    }).always(() => {
+                        this.updating = false;
+                    });
             },
             emptyMember() {
                 this.member = {
@@ -508,7 +463,6 @@
                     member_designation: '',
                     member_number: '',
                     member_status: 'online',
-                    member_image_file: null,
                     member_image_url: null
                 };
                 this.errors = [];
