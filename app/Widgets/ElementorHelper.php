@@ -33,13 +33,13 @@ class ElementorHelper
         wp_register_script('ninjalivechat_manager', NINJALIVECHAT_URL . 'public/frontend/livechat_manager.js', array( 'jquery' ), NINJALIVECHAT_VERSION, true);
     }
 
-    public static function getChats() 
+    public static function getLayouts() 
     {
-        $chats = array();
-        $allChats = [ array('title' => 'design1', 'name' => 'Layout One'), array('title' => 'design2', 'name' => 'Layout Two'), array('title' => 'design3', 'name' => 'Layout Three')];
-        foreach ($allChats as $index=>$chat) {
-            $chats[$chat['title']] = $chat['name'];
+        $layouts = array();
+        $allLayouts = [ array('title' => 'design1', 'name' => 'Layout One'), array('title' => 'design2', 'name' => 'Layout Two'), array('title' => 'design3', 'name' => 'Layout Three')];
+        foreach ($allLayouts as $index=>$layout) {
+            $layouts[$layout['title']] = $layout['name'];
         }
-        return $chats;
+        return $layouts;
     }
 }

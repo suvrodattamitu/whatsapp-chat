@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Ninja Live Chat\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-05-13 14:47+0000\n"
+"POT-Creation-Date: 2021-07-02 14:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Loco-Version: 2.5.2; wp-5.7.2\n"
 "X-Domain: ninjalivechat"
 
-#: app/Menu.php:124
+#: app/Menu.php:123
 msgid "All Collections"
 msgstr ""
 
@@ -24,58 +24,169 @@ msgstr ""
 msgid "All Members"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:96
+#: app/Route/AdminAjaxHandler.php:94
 msgid "All Pages"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:122
+#: app/Widgets/ChatWidget.php:96
+msgid "Ask us anything!"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:206
+msgid "Body"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:213
+msgid "BODY COLOR"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:224
+msgid "BODY TEXT COLOR"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:244
+msgid "BUTTON COLOR"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:255
+msgid "BUTTON TEXT COLOR"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:120
+msgid "Choose Image"
+msgstr ""
+
+#: app/Route/AdminAjaxHandler.php:121
 msgid "Congrats, successfully cleared!"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:86 app/Route/AdminAjaxHandler.php:113
+#: app/Route/AdminAjaxHandler.php:84 app/Route/AdminAjaxHandler.php:112
 msgid "Congrats, successfully saved!"
 msgstr ""
 
+#: app/Widgets/ChatWidget.php:80
+msgid "Content"
+msgstr ""
+
 #: app/Menu.php:48
-msgid "Design Countdown"
+msgid "Design Chat"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:137
+msgid "Designation"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:237
+msgid "Floating Button"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:266
+msgid "FLOATING BUTTON POSITION FROM TOP, (in %)"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:175
+msgid "Header"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:182
+msgid "HEADER COLOR"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:94
+msgid "HEADER DESCRIPTION"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:193
+msgid "HEADER TEXT COLOR"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:86
+msgid "HEADER TITLE"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:157
+msgid "Jessie Doe"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:131 app/Widgets/ChatWidget.php:152
+msgid "John Doe"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:62 app/Widgets/ChatWidget.php:68
+msgid "Layout"
 msgstr ""
 
 #. Author of the plugin
 msgid "Light Plugins"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:178
+#: app/Widgets/ChatWidget.php:162
+msgid "Lilly Watson"
+msgstr ""
+
+#: app/Menu.php:35
+msgid "Live Chat"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:163
+msgid "Marketing Executive"
+msgstr ""
+
+#: app/Route/AdminAjaxHandler.php:151
 msgid "Member added successfully!"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:207
+#: app/Route/AdminAjaxHandler.php:179
 msgid "Member deleted successfully!"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:277
+#: app/Route/AdminAjaxHandler.php:226
 msgid "Member duplicated successfully!"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:263
+#: app/Widgets/ChatWidget.php:146
+msgid "Member Lists"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:112
+msgid "Member Number"
+msgstr ""
+
+#: app/Route/AdminAjaxHandler.php:211
 msgid "Member updated successfully!"
 msgstr ""
 
+#: app/Widgets/ChatWidget.php:105
+msgid "Members"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:129
+msgid "Name"
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:88
+msgid "Need Help?"
+msgstr ""
+
 #. Name of the plugin
-#: app/Menu.php:35
 msgid "Ninja Live Chat"
 msgstr ""
 
 #. Description of the plugin
 msgid ""
-"Ninja Live Chat - is an fastest and easiest alternative to add business "
-"countdown functionalities on your website."
+"Ninja Live Chat - is the fastest and easiest alternative to add chat "
+"functionalities on your website."
+msgstr ""
+
+#: app/Widgets/ChatWidget.php:139 app/Widgets/ChatWidget.php:153
+msgid "Sales Executive"
 msgstr ""
 
 #: app/Menu.php:58
 msgid "Settings"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:218
+#: app/Route/AdminAjaxHandler.php:190
 msgid "Success!"
 msgstr ""
 
@@ -83,6 +194,10 @@ msgstr ""
 msgid "Support"
 msgstr ""
 
-#: app/Route/AdminAjaxHandler.php:99
+#: app/Widgets/ChatWidget.php:158
+msgid "Technical Support"
+msgstr ""
+
+#: app/Route/AdminAjaxHandler.php:97
 msgid "Untitled"
 msgstr ""

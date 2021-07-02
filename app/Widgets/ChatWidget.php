@@ -29,7 +29,7 @@ class ChatWidget extends Widget_Base {
 
     public function get_icon() 
     {
-        return 'eicon-form-horizontal';
+        return 'eicon-commenting-o';
     }
 	
 	public function get_categories() {
@@ -57,23 +57,29 @@ class ChatWidget extends Widget_Base {
     protected function register_controls()
     {
         $this->start_controls_section(
-            'section_fizzy_popup',
+            'ninja_chat_layout_section',
             [
-                'label' => __('Live Chat', 'fizzypopups'),
+                'label' => __('Layout', 'ninjalivechat'),
             ]
         );
-
         $this->add_control(
             'nlc_layout',
             [
-                'label' => esc_html__('Ninja Chats', 'fizzypopups'),
+                'label' => esc_html__('Layout', 'ninjalivechat'),
                 'type' => Controls_Manager::SELECT,
                 'label_block' => true,
-                'options' => ElementorHelper::getChats(),
+                'options' => ElementorHelper::getLayouts(),
                 'default' => 'design2',
             ]
         );
+        $this->end_controls_section();
 
+        $this->start_controls_section(
+            'ninja_chat_content_section',
+            [
+                'label' => __('Content', 'ninjalivechat'),
+            ]
+        );
         $this->add_control(
 			'nlc_header_title',
 			[
@@ -82,7 +88,6 @@ class ChatWidget extends Widget_Base {
 				'default'		=> __('Need Help?','ninjalivechat'),
 			]
 		);
-
         $this->add_control(
 			'nlc_header_description',
 			[
@@ -91,7 +96,6 @@ class ChatWidget extends Widget_Base {
 				'default'		=> __('Ask us anything!','ninjalivechat'),
 			]
 		);
-
         $this->end_controls_section();
 
         //members
@@ -102,9 +106,7 @@ class ChatWidget extends Widget_Base {
 				'tab' => Controls_Manager::TAB_CONTENT,
 			]
         );
-
         $repeater = new \Elementor\Repeater();
-
         $repeater->add_control(
             'nlc_member_number', [
                 'label' => __( 'Member Number', 'ninjalivechat' ),
@@ -113,7 +115,6 @@ class ChatWidget extends Widget_Base {
                 'label_block' => true,
             ]
         );
-
         $repeater->add_control(
             'nlc_member_image', [
                 'label' => __( 'Choose Image', 'ninjalivechat' ),
@@ -123,7 +124,6 @@ class ChatWidget extends Widget_Base {
 				],
             ]
         );
-
         $repeater->add_control(
             'nlc_member_name', [
                 'label' => __( 'Name', 'ninjalivechat' ),
@@ -132,17 +132,14 @@ class ChatWidget extends Widget_Base {
                 'label_block' => true,
             ]
         );
-
         $repeater->add_control(
             'nlc_member_designation', [
                 'label' => __( 'Designation', 'ninjalivechat' ),
                 'type' => Controls_Manager::TEXT,
-                'default' => __( 'CEO' , 'ninjalivechat' ),
+                'default' => __( 'Sales Executive' , 'ninjalivechat' ),
                 'label_block' => true,
             ]
         );
-
-  
         $this->add_control(
             'nlc_member_lists',
             [
@@ -157,49 +154,26 @@ class ChatWidget extends Widget_Base {
                     ],
                     [
                         'nlc_member_number' => '34567',
-                        'nlc_member_name' => __( 'Michael Jackson', 'ninjalivechat' ),
+                        'nlc_member_name' => __( 'Jessie Doe', 'ninjalivechat' ),
                         'nlc_member_designation'    => __('Technical Support', 'ninjalivechat' )             
                     ],
                     [
                         'nlc_member_number' => '345678',
-                        'nlc_member_name' => __( 'Jackson', 'ninjalivechat' ),
+                        'nlc_member_name' => __( 'Lilly Watson', 'ninjalivechat' ),
                         'nlc_member_designation'    => __('Marketing Executive', 'ninjalivechat' )              
                     ],
                 ],
                 'title_field' => '{{{ nlc_member_name }}}',
             ]
         );
-
         $this->end_controls_section();
 
         //styles
-		$this->start_controls_section(
-			'live_chat_style_section',
+        $this->start_controls_section(
+			'ninja_chat_header_style_section',
 			[
-				'label' => __( 'Live Chat' , 'ninjalivechat' ),
+				'label' => __( 'Header' , 'ninjalivechat' ),
 				'tab'   => Controls_Manager::TAB_STYLE
-			]
-		);
-        $this->add_control(
-			'nlc_button_color',
-			[
-				'label' => __( 'BUTTON COLOR', 'ninjalivechat' ),
-				'type' => Controls_Manager::COLOR,
-                'default'   => '#ffffff',
-				'selectors' => [
-					'{{WRAPPER}} .ninja-floating-button' => 'background-color: {{VALUE}};',
-				],
-			]
-		);
-        $this->add_control(
-			'nlc_button_text_color',
-			[
-				'label' => __( 'BUTTON TEXT COLOR', 'ninjalivechat' ),
-				'type' => Controls_Manager::COLOR,
-                'default'   => '#ffffff',
-				'selectors' => [
-					'{{WRAPPER}} .ninja-floating-button' => 'color: {{VALUE}};',
-				],
 			]
 		);
         $this->add_control(
@@ -224,6 +198,15 @@ class ChatWidget extends Widget_Base {
 				],
 			]
 		);
+        $this->end_controls_section();
+
+        $this->start_controls_section(
+			'ninja_chat_body_style_section',
+			[
+				'label' => __( 'Body' , 'ninjalivechat' ),
+				'tab'   => Controls_Manager::TAB_STYLE
+			]
+		);
         $this->add_control(
 			'nlc_body_color',
 			[
@@ -243,6 +226,37 @@ class ChatWidget extends Widget_Base {
                 'default'   => '#3FB122',
 				'selectors' => [
 					'{{WRAPPER}} .ninja-chat-box .ninja-chat-body .ninja-member-details' => 'color: {{VALUE}};',
+				],
+			]
+		);
+        $this->end_controls_section();
+
+		$this->start_controls_section(
+			'ninja_chat_button_style_section',
+			[
+				'label' => __( 'Floating Button' , 'ninjalivechat' ),
+				'tab'   => Controls_Manager::TAB_STYLE
+			]
+		);
+        $this->add_control(
+			'nlc_button_color',
+			[
+				'label' => __( 'BUTTON COLOR', 'ninjalivechat' ),
+				'type' => Controls_Manager::COLOR,
+                'default'   => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .ninja-floating-button' => 'background-color: {{VALUE}};',
+				],
+			]
+		);
+        $this->add_control(
+			'nlc_button_text_color',
+			[
+				'label' => __( 'BUTTON TEXT COLOR', 'ninjalivechat' ),
+				'type' => Controls_Manager::COLOR,
+                'default'   => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .ninja-floating-button' => 'color: {{VALUE}};',
 				],
 			]
 		);

@@ -13,6 +13,7 @@
 
 <script type="text/babel">
 export default {
+    emits: ['update:modelValue'],
     props: ['modelValue'],
 
     data() {

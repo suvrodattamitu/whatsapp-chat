@@ -26,15 +26,15 @@ export default {
         return {
             options: [
                 {
-                    label: 'Design1',
+                    label: 'Layout One',
                     value: 'design1',
                 },
                 {
-                    label: 'Design2',
+                    label: 'Layout Two',
                     value: 'design2',
                 },
                 {
-                    label: 'Design3',
+                    label: 'Layout Three',
                     value: 'design3',
                 }
             ]
